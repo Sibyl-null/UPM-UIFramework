@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.LayerController;
-using UI.Runtime.Page;
-using UI.Runtime.PageFactory;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.LayerController;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageFactory;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.PageController
+namespace UIFramework.Runtime.PageController
 {
     public class UIPageController : IPageController
     {

@@ -1,12 +1,12 @@
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
-using UI.Runtime.PageController;
-using UI.Runtime.QueueDriver;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageController;
+using UIFramework.Runtime.QueueDriver;
+using UIFramework.Runtime.Utility;
 
 namespace UnitTests
 {

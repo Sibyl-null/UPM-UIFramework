@@ -1,7 +1,7 @@
 using NSubstitute;
 using NUnit.Framework;
-using UI.Runtime.Page;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 
 namespace UnitTests
 {

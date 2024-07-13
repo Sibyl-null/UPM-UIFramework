@@ -1,7 +1,7 @@
 using System;
-using UI.Runtime.InfoContainer;
+using UIFramework.Runtime.InfoContainer;
 
-namespace UI.Runtime.EventBus
+namespace UIFramework.Runtime.EventBus
 {
     public interface IEventBus
     {

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UI.Editor.CodeGenerator;
-using UI.Runtime;
+using UIFramework.Editor.CodeGenerator;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UI.Editor
+namespace UIFramework.Editor
 {
     public static class UIMenuItems
     {

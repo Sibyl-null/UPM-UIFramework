@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using UI.Runtime.InfoContainer;
+using UIFramework.Runtime.InfoContainer;
 
-namespace UI.Runtime.EventBus
+namespace UIFramework.Runtime.EventBus
 {
     public class UIEventBus : IEventBus
     {

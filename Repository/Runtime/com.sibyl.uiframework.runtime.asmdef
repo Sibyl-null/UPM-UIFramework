@@ -1,6 +1,6 @@
 {
     "name": "com.sibyl.uiframework.runtime",
-    "rootNamespace": "UI.Runtime",
+    "rootNamespace": "UIFramework.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

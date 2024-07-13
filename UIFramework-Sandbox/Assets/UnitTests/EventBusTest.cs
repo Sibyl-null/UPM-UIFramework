@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
 
 namespace UnitTests
 {

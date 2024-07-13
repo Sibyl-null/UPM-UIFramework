@@ -1,4 +1,4 @@
-namespace UI.Runtime.EscapeReceiver
+namespace UIFramework.Runtime.EscapeReceiver
 {
     public interface IEscapeReceiver
     {

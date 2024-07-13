@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
-using UI.Runtime.PageController;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageController;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.QueueDriver
+namespace UIFramework.Runtime.QueueDriver
 {
     public struct QueueInfo
     {

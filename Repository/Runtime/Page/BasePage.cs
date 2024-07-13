@@ -1,9 +1,9 @@
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI.Runtime.Page
+namespace UIFramework.Runtime.Page
 {
     public abstract class BasePage : MonoBehaviour, IPage
     {

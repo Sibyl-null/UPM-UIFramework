@@ -1,6 +1,6 @@
 {
     "name": "com.sibyl.uiframework.editor",
-    "rootNamespace": "UI.Editor",
+    "rootNamespace": "UIFramework.Editor",
     "references": [
         "GUID:7dba046bb4dd145e18ab37222b3392c0"
     ],

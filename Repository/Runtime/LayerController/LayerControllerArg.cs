@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.Runtime.LayerController
+namespace UIFramework.Runtime.LayerController
 {
     public class LayerControllerArg
     {

@@ -1,7 +1,7 @@
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
 
-namespace UI.Runtime.QueueDriver
+namespace UIFramework.Runtime.QueueDriver
 {
     public interface IQueueDriver
     {

@@ -1,18 +1,18 @@
-using UI.Runtime.EscapeReceiver;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.LayerController;
-using UI.Runtime.Page;
-using UI.Runtime.PageController;
-using UI.Runtime.PageFactory;
-using UI.Runtime.QueueDriver;
-using UI.Runtime.ResLoader;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.EscapeReceiver;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.LayerController;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageController;
+using UIFramework.Runtime.PageFactory;
+using UIFramework.Runtime.QueueDriver;
+using UIFramework.Runtime.ResLoader;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UI.Runtime
+namespace UIFramework.Runtime
 {
     public abstract class AbstractUIManager
     {

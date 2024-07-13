@@ -1,6 +1,6 @@
-using UI.Runtime.Utility;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.Page
+namespace UIFramework.Runtime.Page
 {
     public class PageBehaviourLogic
     {

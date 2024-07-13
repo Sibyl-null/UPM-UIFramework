@@ -1,5 +1,5 @@
-using UI.Runtime;
-using UI.Runtime.Page;
+using UIFramework.Runtime;
+using UIFramework.Runtime.Page;
 
 namespace UI.Core
 {

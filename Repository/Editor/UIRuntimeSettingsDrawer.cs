@@ -1,8 +1,8 @@
-using UI.Runtime;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace UI.Editor
+namespace UIFramework.Editor
 {
     [CustomEditor(typeof(UIRuntimeSettings))]
     public class UIRuntimeSettingsDrawer : UnityEditor.Editor

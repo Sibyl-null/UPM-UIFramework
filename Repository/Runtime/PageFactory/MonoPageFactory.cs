@@ -1,11 +1,11 @@
-using UI.Runtime.InfoContainer;
-using UI.Runtime.LayerController;
-using UI.Runtime.Page;
-using UI.Runtime.ResLoader;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.LayerController;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.ResLoader;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
-namespace UI.Runtime.PageFactory
+namespace UIFramework.Runtime.PageFactory
 {
     public class MonoPageFactory : IPageFactory
     {

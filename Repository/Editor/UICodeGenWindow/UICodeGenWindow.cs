@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UI.Editor.CodeGenerator;
-using UI.Runtime;
-using UI.Runtime.Page;
+using UIFramework.Editor.CodeGenerator;
+using UIFramework.Runtime;
+using UIFramework.Runtime.Page;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Editor.UICodeGenWindow
+namespace UIFramework.Editor.UICodeGenWindow
 {
     public class UICodeGenWindow : EditorWindow
     {

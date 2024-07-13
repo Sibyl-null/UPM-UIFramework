@@ -1,7 +1,7 @@
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.Page
+namespace UIFramework.Runtime.Page
 {
     public interface IPageArg
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UI.Runtime.Page;
+using UIFramework.Runtime.Page;
 using UnityEngine;
 
-namespace UI.Runtime.LayerController
+namespace UIFramework.Runtime.LayerController
 {
     public interface ILayerController
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace UI.Runtime
+namespace UIFramework.Runtime
 {
     [Conditional("UNITY_EDITOR")]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]

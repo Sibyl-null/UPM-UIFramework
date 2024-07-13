@@ -1,14 +1,14 @@
 using NSubstitute;
 using NUnit.Framework;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.LayerController;
-using UI.Runtime.Page;
-using UI.Runtime.PageController;
-using UI.Runtime.PageFactory;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.LayerController;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageController;
+using UIFramework.Runtime.PageFactory;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
-using EventType = UI.Runtime.EventBus.EventType;
+using EventType = UIFramework.Runtime.EventBus.EventType;
 
 namespace UnitTests
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.Runtime.ResLoader
+namespace UIFramework.Runtime.ResLoader
 {
     public interface IResLoader
     {

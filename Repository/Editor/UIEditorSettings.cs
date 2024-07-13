@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UI.Runtime;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine;
 
-namespace UI.Editor
+namespace UIFramework.Editor
 {
     public class UIEditorSettings : ScriptableObject
     {

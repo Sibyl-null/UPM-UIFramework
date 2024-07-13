@@ -1,6 +1,6 @@
 using System;
 
-namespace UI.Runtime.Utility
+namespace UIFramework.Runtime.Utility
 {
     public class UIAsyncHandle
     {

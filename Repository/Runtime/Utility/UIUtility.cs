@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace UI.Runtime.Utility
+namespace UIFramework.Runtime.Utility
 {
     public static class UIUtility
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UI.Runtime.Utility
+namespace UIFramework.Runtime.Utility
 {
     /** 模拟栈行为的列表 */
     public sealed class StackList<T>

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Runtime
+namespace UIFramework.Runtime
 {
     [AddComponentMenu("UI/Extension/UIRaycast")]
     [RequireComponent(typeof(CanvasRenderer))]

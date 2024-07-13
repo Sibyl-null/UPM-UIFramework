@@ -1,7 +1,7 @@
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
 
-namespace UI.Runtime.PageFactory
+namespace UIFramework.Runtime.PageFactory
 {
     public interface IPageFactory
     {

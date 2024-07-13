@@ -1,6 +1,6 @@
-using UI.Runtime;
-using UI.Runtime.Page;
-using UI.Runtime.Utility;
+using UIFramework.Runtime;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UI.Core

@@ -1,4 +1,4 @@
-namespace UI.Runtime.EventBus
+namespace UIFramework.Runtime.EventBus
 {
     public enum EventType
     {

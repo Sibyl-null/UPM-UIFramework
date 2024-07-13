@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using Scriban;
 using Scriban.Runtime;
-using UI.Runtime;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Editor
+namespace UIFramework.Editor
 {
     public static class UIEditorUtility
     {

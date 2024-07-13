@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.PageController
+namespace UIFramework.Runtime.PageController
 {
     public interface IPageController
     {

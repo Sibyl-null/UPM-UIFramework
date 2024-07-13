@@ -1,6 +1,6 @@
 using System;
 
-namespace UI.Runtime.InfoContainer
+namespace UIFramework.Runtime.InfoContainer
 {
     public class UIInfo
     {

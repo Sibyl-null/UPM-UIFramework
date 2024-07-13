@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
-using UI.Runtime.LayerController;
-using UI.Runtime.Page;
+using UIFramework.Runtime.LayerController;
+using UIFramework.Runtime.Page;
 using UnityEngine;
 
 namespace UnitTests

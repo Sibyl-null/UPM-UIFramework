@@ -4,8 +4,8 @@
 
 using System;
 using UI.Core;
-using UI.Runtime.InfoContainer;
 using UI.Page;
+using UIFramework.Runtime.InfoContainer;
 
 namespace UI.Core
 {

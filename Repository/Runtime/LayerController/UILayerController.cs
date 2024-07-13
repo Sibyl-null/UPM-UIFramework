@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UI.Runtime.Page;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UI.Runtime.LayerController
+namespace UIFramework.Runtime.LayerController
 {
     public class UILayerController : ILayerController
     {

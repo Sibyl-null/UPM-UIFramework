@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UI.Runtime;
-using UI.Runtime.InfoContainer;
+using UIFramework.Runtime;
+using UIFramework.Runtime.InfoContainer;
 using UnityEditor;
 
-namespace UI.Editor.CodeGenerator
+namespace UIFramework.Editor.CodeGenerator
 {
     /** 自动生成 UIInfo 代码 */
     internal static class UIInfoGenerator

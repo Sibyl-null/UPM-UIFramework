@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UI.Runtime;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace UI.Editor.CodeGenerator
+namespace UIFramework.Editor.CodeGenerator
 {
     internal static class BaseUIGenerator
     {

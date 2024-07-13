@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using UI.Runtime.Utility;
+using UIFramework.Runtime.Utility;
 
-namespace UI.Runtime.InfoContainer
+namespace UIFramework.Runtime.InfoContainer
 {
     public class UIInfoContainer
     {

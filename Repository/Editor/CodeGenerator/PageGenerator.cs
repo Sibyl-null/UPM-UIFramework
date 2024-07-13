@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using UI.Runtime;
+using UIFramework.Runtime;
 
-namespace UI.Editor.CodeGenerator
+namespace UIFramework.Editor.CodeGenerator
 {
     internal static class PageGenerator
     {

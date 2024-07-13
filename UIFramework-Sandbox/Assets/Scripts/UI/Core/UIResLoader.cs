@@ -1,5 +1,5 @@
-using UI.Runtime;
-using UI.Runtime.ResLoader;
+using UIFramework.Runtime;
+using UIFramework.Runtime.ResLoader;
 using UnityEngine;
 
 namespace UI.Core

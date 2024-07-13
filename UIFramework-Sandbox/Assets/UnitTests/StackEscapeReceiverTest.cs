@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
-using UI.Runtime.EscapeReceiver;
-using UI.Runtime.EventBus;
-using UI.Runtime.InfoContainer;
-using UI.Runtime.Page;
-using UI.Runtime.PageController;
+using UIFramework.Runtime.EscapeReceiver;
+using UIFramework.Runtime.EventBus;
+using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.PageController;
 
 namespace UnitTests
 {
