@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UIFramework.Runtime.EventBus;
@@ -16,7 +17,7 @@ namespace UIFramework.Runtime.PageController
         private readonly IEventBus _eventBus;
         private readonly string _sortingLayerName;
         
-        private readonly Dictionary<int, IPage> _pageDic = new Dictionary<int, IPage>(32);
+        private readonly Dictionary<Type, IPage> _pageDic = new(32);
 
         public UIPageController(IPageFactory pageFactory, ILayerController layerController, IEventBus eventBus, string sortingLayerName)
         {
@@ -41,7 +42,7 @@ namespace UIFramework.Runtime.PageController
         
         public IPage GetPage(UIInfo info)
         {
-            return _pageDic.GetValueOrDefault(info.UIType);
+            return _pageDic.GetValueOrDefault(info.PageType);
         }
 
         public IEnumerable<IPage> GetAllPages()
@@ -54,18 +55,18 @@ namespace UIFramework.Runtime.PageController
             IPage page = GetPage(info);
             if (page != null)
             {
-                UILogger.Warning($"[UI] Page 已存在: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 已存在: {info.PageType.Name}");
                 return page;
             }
             
             page = _pageFactory.CreatePage(info);
             if (page == null)
             {
-                UILogger.Error($"[UI] Page 创建失败: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Error($"[UI] Page 创建失败: {info.PageType.Name}");
                 return null;
             }
 
-            _pageDic.Add(info.UIType, page);
+            _pageDic.Add(info.PageType, page);
             
             _eventBus.Dispatch(EventType.CreateBefore, info);
             page.Create(info, _sortingLayerName);
@@ -84,13 +85,13 @@ namespace UIFramework.Runtime.PageController
 
             if (page.IsOpening)
             {
-                UILogger.Warning($"[UI] Page 已打开: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 已打开: {info.PageType.Name}");
                 return null;
             }
 
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 
@@ -108,19 +109,19 @@ namespace UIFramework.Runtime.PageController
             IPage page = GetPage(info);
             if (page == null)
             {
-                UILogger.Warning($"[UI] Page 不存在: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
                 return null;
             }
 
             if (!page.IsOpening)
             {
-                UILogger.Warning($"[UI] Page 已关闭: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 已关闭: {info.PageType.Name}");
                 return null;
             }
             
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 
@@ -141,13 +142,13 @@ namespace UIFramework.Runtime.PageController
             IPage page = GetPage(info);
             if (page == null)
             {
-                UILogger.Warning($"[UI] Page 不存在: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
                 return null;
             }
             
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 
@@ -171,14 +172,14 @@ namespace UIFramework.Runtime.PageController
             _eventBus.Dispatch(EventType.DestroyBefore, info);
             page.Destroy();
             _eventBus.Dispatch(EventType.DestroyAfter, info);
-            _pageDic.Remove(info.UIType);
+            _pageDic.Remove(info.PageType);
         }
         
 
         [Conditional("UNITY_EDITOR")]
-        internal void AddPageInDebug(int uiType, IPage page)
+        internal void AddPageInDebug(IPage page)
         {
-            _pageDic.Add(uiType, page);
+            _pageDic.Add(page.GetType(), page);
         }
     }
 }

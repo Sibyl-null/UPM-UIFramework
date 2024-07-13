@@ -25,8 +25,8 @@ namespace UnitTests
             List<IPage> pageList = new List<IPage>();
             for (int i = 0; i < 3; ++i)
             {
-                UIInfo info = new UIInfo(i, default,default, default);
                 IPage page = Substitute.For<IPage>();
+                UIInfo info = new UIInfo(page.GetType(), default,default);
 
                 page.InputActive.Returns(true);
                 page.CanConsumeEscape().Returns(i <= index);
@@ -64,8 +64,8 @@ namespace UnitTests
             List<IPage> pageList = new List<IPage>();
             for (int i = 0; i < 3; ++i)
             {
-                UIInfo info = new UIInfo(i, default,default, default);
                 IPage page = Substitute.For<IPage>();
+                UIInfo info = new UIInfo(page.GetType(), default,default);
 
                 page.InputActive.Returns(i != index);
                 page.CanConsumeEscape().Returns(false);

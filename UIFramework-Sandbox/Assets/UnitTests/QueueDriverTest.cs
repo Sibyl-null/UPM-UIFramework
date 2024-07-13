@@ -1,3 +1,4 @@
+using System;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
@@ -16,6 +17,11 @@ namespace UnitTests
         private IEventBus _eventBus;
         private UIQueueDriver _queueDriver;
 
+        private Type OneMockPageType => typeof(IOneMockPage);
+        private Type TwoMockPageType => typeof(ITwoMockPage);
+        private Type ThreeMockPageType => typeof(IThreeMockPage);
+        private Type FourMockPageType => typeof(IFourMockPage);
+        
         [SetUp]
         public void Setup()
         {
@@ -36,7 +42,7 @@ namespace UnitTests
         {
             // arrange
             _pageController.OpenPage(default).ReturnsForAnyArgs(new UIAsyncHandle());
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             IPageArg arg = Substitute.For<IPageArg>();
             
             // act
@@ -44,7 +50,7 @@ namespace UnitTests
             
             // assert
             _pageController.Received(1).OpenPage(info, arg);
-            Assert.AreEqual(info.UIType, _queueDriver.NowUIType);
+            Assert.AreEqual(info.PageType, _queueDriver.NowPageType);
             Assert.AreEqual(0, _queueDriver.InfoList.Count);
         }
 
@@ -53,7 +59,7 @@ namespace UnitTests
         {
             // arrange
             _pageController.OpenPage(default).ReturnsNullForAnyArgs();
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             IPageArg arg = Substitute.For<IPageArg>();
             
             // act
@@ -61,7 +67,7 @@ namespace UnitTests
             
             // assert
             _pageController.Received(1).OpenPage(info, arg);
-            Assert.AreEqual(null, _queueDriver.NowUIType);
+            Assert.AreEqual(null, _queueDriver.NowPageType);
             Assert.AreEqual(0, _queueDriver.InfoList.Count);
         }
 
@@ -70,12 +76,12 @@ namespace UnitTests
         {
             // arrange
             _pageController.OpenPage(default).ReturnsForAnyArgs(new UIAsyncHandle());
-            _queueDriver.NowUIType = 0;
+            _queueDriver.NowPageType = OneMockPageType;
             
             // act
-            UIInfo info1 = new UIInfo(1, default, default, default);
-            UIInfo info2 = new UIInfo(2, default, default, default);
-            UIInfo info3 = new UIInfo(3, default, default, default);
+            UIInfo info1 = new UIInfo(TwoMockPageType, default, default);
+            UIInfo info2 = new UIInfo(ThreeMockPageType, default, default);
+            UIInfo info3 = new UIInfo(FourMockPageType, default, default);
             
             _queueDriver.EnqueueQueueInfo(info1, null, 2);
             _queueDriver.EnqueueQueueInfo(info2, null, 1);
@@ -92,11 +98,11 @@ namespace UnitTests
         public void _05_TryDequeueQueueInfo_With_NowUIType_Is_Null()
         {
             // arrange
-            _queueDriver.NowUIType = null;
+            _queueDriver.NowPageType = null;
             _queueDriver.InfoList.Add(new QueueInfo());
             
             // act
-            _queueDriver.TryDequeueQueueInfo(new UIInfo(1, default, default, default));
+            _queueDriver.TryDequeueQueueInfo(new UIInfo(OneMockPageType, default, default));
             
             // assert
             Assert.AreEqual(1, _queueDriver.InfoList.Count);
@@ -107,11 +113,11 @@ namespace UnitTests
         public void _06_TryDequeueQueueInfo_With_NowUIType_Is_Not_Equal()
         {
             // arrange
-            _queueDriver.NowUIType = 1;
+            _queueDriver.NowPageType = OneMockPageType;
             _queueDriver.InfoList.Add(new QueueInfo());
             
             // act
-            _queueDriver.TryDequeueQueueInfo(new UIInfo(2, default, default, default));
+            _queueDriver.TryDequeueQueueInfo(new UIInfo(TwoMockPageType, default, default));
             
             // assert
             Assert.AreEqual(1, _queueDriver.InfoList.Count);
@@ -122,12 +128,12 @@ namespace UnitTests
         public void _07_TryDequeueQueueInfo_With_NowUIType_Is_Equal()
         {
             // arrange
-            _queueDriver.NowUIType = 1;
-            UIInfo info = new UIInfo(2, default, default, default);
+            _queueDriver.NowPageType = OneMockPageType;
+            UIInfo info = new UIInfo(TwoMockPageType, default, default);
             _queueDriver.InfoList.Add(new QueueInfo(info, null, 0));
 
             // act
-            _queueDriver.TryDequeueQueueInfo(new UIInfo(1, default, default, default));
+            _queueDriver.TryDequeueQueueInfo(new UIInfo(OneMockPageType, default, default));
 
             // assert
             Assert.AreEqual(0, _queueDriver.InfoList.Count);
@@ -138,18 +144,18 @@ namespace UnitTests
         public void _08_TryDequeueQueueInfo_With_OpenSuccess()
         {
             // arrange
-            _queueDriver.NowUIType = 1;
-            UIInfo info = new UIInfo(2, default, default, default);
+            _queueDriver.NowPageType = OneMockPageType;
+            UIInfo info = new UIInfo(TwoMockPageType, default, default);
             _queueDriver.InfoList.Add(new QueueInfo(info, null, 0));
             
             _pageController.OpenPage(default).ReturnsForAnyArgs(new UIAsyncHandle());
 
             // act
-            _queueDriver.TryDequeueQueueInfo(new UIInfo(1, default, default, default));
+            _queueDriver.TryDequeueQueueInfo(new UIInfo(OneMockPageType, default, default));
             
             // assert
             Assert.AreEqual(0, _queueDriver.InfoList.Count);
-            Assert.AreEqual(info.UIType, _queueDriver.NowUIType);
+            Assert.AreEqual(info.PageType, _queueDriver.NowPageType);
             _pageController.Received(1).OpenPage(info);
         }
         
@@ -157,18 +163,18 @@ namespace UnitTests
         public void _09_TryDequeueQueueInfo_With_OpenFailure()
         {
             // arrange
-            _queueDriver.NowUIType = 1;
-            UIInfo info = new UIInfo(2, default, default, default);
+            _queueDriver.NowPageType = OneMockPageType;
+            UIInfo info = new UIInfo(TwoMockPageType, default, default);
             _queueDriver.InfoList.Add(new QueueInfo(info, null, 0));
             
             _pageController.OpenPage(default).ReturnsNullForAnyArgs();
 
             // act
-            _queueDriver.TryDequeueQueueInfo(new UIInfo(1, default, default, default));
+            _queueDriver.TryDequeueQueueInfo(new UIInfo(OneMockPageType, default, default));
             
             // assert
             Assert.AreEqual(0, _queueDriver.InfoList.Count);
-            Assert.AreEqual(null, _queueDriver.NowUIType);
+            Assert.AreEqual(null, _queueDriver.NowPageType);
             _pageController.Received(1).OpenPage(info);
         }
     }

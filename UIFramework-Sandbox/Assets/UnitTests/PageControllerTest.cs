@@ -1,3 +1,4 @@
+using System;
 using NSubstitute;
 using NUnit.Framework;
 using UIFramework.Runtime.EventBus;
@@ -20,6 +21,8 @@ namespace UnitTests
         private ILayerController _layerController;
         private UIPageController _pageController;
         private IEventBus _eventBus;
+        
+        private Type OneMockPageType => typeof(IOneMockPage);
         
         [SetUp]
         public void Setup()
@@ -50,7 +53,7 @@ namespace UnitTests
         public void _01_OpenPage_With_Page_FirstOpen()
         {
             // arrange
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             
             // act
             UIAsyncHandle handle = _pageController.OpenPage(info);
@@ -83,8 +86,8 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.OpenPage(info);
@@ -115,8 +118,8 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.OpenPage(info);
@@ -142,8 +145,8 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.OpenPage(info);
@@ -167,7 +170,7 @@ namespace UnitTests
         public void _05_ClosePage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             
             // act
             UIAsyncHandle handle = _pageController.ClosePage(info, default);
@@ -187,8 +190,8 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.ClosePage(info, default);
@@ -214,8 +217,8 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.ClosePage(info, default);
@@ -238,8 +241,8 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.ClosePage(info, default);
@@ -260,7 +263,7 @@ namespace UnitTests
         public void _09_DestroyPage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             
             // act
             UIAsyncHandle handle = _pageController.DestroyPage(info, default);
@@ -282,8 +285,8 @@ namespace UnitTests
             IPage page = SubstitutePage();
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.DestroyPage(info, default);
@@ -309,8 +312,8 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.DestroyPage(info, default);
@@ -341,8 +344,8 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
 
             // act
             UIAsyncHandle handle = _pageController.DestroyPage(info, default);
@@ -370,7 +373,7 @@ namespace UnitTests
         public void _13_CreatePage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(1, default, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default, default);
             
             // act
             IPage page = _pageController.CreatePage(info);
@@ -392,8 +395,8 @@ namespace UnitTests
             // arrange
             IPage page = SubstitutePage();
             
-            UIInfo info = new UIInfo(1, default, default, default);
-            _pageController.AddPageInDebug(info.UIType, page);
+            UIInfo info = new UIInfo(page.GetType(), default, default);
+            _pageController.AddPageInDebug(page);
             
             // act
             IPage newPage = _pageController.CreatePage(info);

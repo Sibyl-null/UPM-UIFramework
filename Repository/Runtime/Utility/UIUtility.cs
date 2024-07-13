@@ -15,25 +15,6 @@ namespace UIFramework.Runtime.Utility
             trans.pivot = NormalizePivot;
             trans.anchoredPosition = Vector2.zero;
         }
-
-        // -----------------------------------------------------------------------------
-
-        private static Func<int, string> _uiTypeLogFunc;
-        
-        public static void SetUITypeLogger(Func<int, string> func)
-        {
-            _uiTypeLogFunc = func;
-        }
-
-        public static string LogUIType(int uiType)
-        {
-            if (_uiTypeLogFunc != null)
-            {
-                return _uiTypeLogFunc.Invoke(uiType);
-            }
-
-            return uiType.ToString();
-        }
         
         // -----------------------------------------------------------------------------
         

@@ -1,3 +1,4 @@
+using System;
 using UIFramework.Runtime.EscapeReceiver;
 using UIFramework.Runtime.EventBus;
 using UIFramework.Runtime.InfoContainer;
@@ -66,74 +67,62 @@ namespace UIFramework.Runtime
             EventSystem.enabled = flag;
         }
 
-        protected IPage GetPage(int uiType)
+        public IPage GetPage(Type pageType)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return null;
             
             return PageController.GetPage(info);
         }
 
-        protected T GetPage<T>(int? uiType = null) where T : class, IPage
+        public T GetPage<T>() where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return null;
-            
-            return PageController.GetPage(info) as T;
+            return GetPage(typeof(T)) as T;
         }
 
-        protected void CreatePage(int uiType)
+        public void CreatePage(Type pageType)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return;
 
             PageController.CreatePage(info);
         }
 
-        protected void CreatePage<T>(int? uiType = null) where T : class, IPage
+        public void CreatePage<T>() where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return;
-
-            PageController.CreatePage(info);
+            CreatePage(typeof(T));
         }
-
-        protected void OpenPage(int uiType, IPageArg arg = null)
+        
+        public void OpenPage(Type pageType, IPageArg arg = null)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return;
 
             PageController.OpenPage(info, arg);
         }
         
-        protected void OpenPage<T>(int? uiType = null, IPageArg arg = null) where T : class, IPage
+        public void OpenPage<T>(IPageArg arg = null) where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return;
-
-            PageController.OpenPage(info, arg);
+            OpenPage(typeof(T), arg);
         }
-
-        protected void ClosePage(int uiType, bool closeAnim = true)
+        
+        public void ClosePage(Type pageType, bool closeAnim = true)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return;
 
             PageController.ClosePage(info, closeAnim);
         }
         
-        protected void ClosePage<T>(int? uiType = null, bool closeAnim = true) where T : class, IPage
+        public void ClosePage<T>(bool closeAnim = true) where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return;
-
-            PageController.ClosePage(info, closeAnim);
+            ClosePage(typeof(T), closeAnim);
         }
         
         /** 禁止在 UI 的 OnTick 中移除 Page */
-        protected void DestroyPage(int uiType, bool closeAnim = true)
+        public void DestroyPage(Type pageType, bool closeAnim = true)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return;
 
             UIAsyncHandle handle = PageController.DestroyPage(info, closeAnim);
@@ -141,30 +130,23 @@ namespace UIFramework.Runtime
                 handle.AddCompletedCallback(() => ResLoader.UnLoad(info.LoadPath));
         }
         
-        protected void DestroyPage<T>(int? uiType = null, bool closeAnim = true) where T : class, IPage
+        /** 禁止在 UI 的 OnTick 中移除 Page */
+        public void DestroyPage<T>(bool closeAnim = true) where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return;
+            DestroyPage(typeof(T), closeAnim);
+        }
 
-            UIAsyncHandle handle = PageController.DestroyPage(info, closeAnim);
-            if (handle != null)
-                handle.AddCompletedCallback(() => ResLoader.UnLoad(info.LoadPath));
-        }
-        
-        protected void OpenQueuePage(int uiType, IPageArg arg = null, int policy = 0)
+        public void OpenQueuePage(Type pageType, IPageArg arg = null, int policy = 0)
         {
-            if (!InfoContainer.TryGetInfo(uiType, out UIInfo info))
+            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
                 return;
             
             QueueDriver.EnqueueQueueInfo(info, arg, policy);
         }
         
-        protected void OpenQueuePage<T>(int? uiType = null, IPageArg arg = null, int policy = 0) where T : class, IPage
+        public void OpenQueuePage<T>(IPageArg arg = null, int policy = 0) where T : class, IPage
         {
-            if (!InfoContainer.TryGetInfo(typeof(T), uiType, out UIInfo info))
-                return;
-            
-            QueueDriver.EnqueueQueueInfo(info, arg, policy);
+            OpenQueuePage(typeof(T), arg, policy);
         }
         
         public virtual void Tick()

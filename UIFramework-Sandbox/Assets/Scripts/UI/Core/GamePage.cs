@@ -16,7 +16,7 @@ namespace UI.Core
         public override void OnEscape()
         {
             base.OnEscape();
-            UIManager.Instance.ClosePage((UIType)UIInfo.UIType);
+            UIManager.Instance.ClosePage(UIInfo.PageType);
         }
     }
 }

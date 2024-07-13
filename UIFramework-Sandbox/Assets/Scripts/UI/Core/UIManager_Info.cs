@@ -13,7 +13,7 @@ namespace UI.Core
     {
         private void AddInfo(UIType uiType, UILayer layer, Type pageType, string loadPath)
         {
-            InfoContainer.AddInfo(new UIInfo((int)uiType, (int)layer, pageType, loadPath));
+            InfoContainer.AddInfo(new UIInfo(pageType, (int)layer, loadPath));
         }
         
         private void LoadInfos()

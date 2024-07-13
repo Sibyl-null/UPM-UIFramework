@@ -2,7 +2,6 @@ using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.ResLoader;
-using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UIFramework.Runtime.PageFactory
@@ -31,12 +30,12 @@ namespace UIFramework.Runtime.PageFactory
             GameObject go = _resLoader.LoadAndInstantiatePrefab(info.LoadPath, parent);
             if (go == null)
             {
-                UILogger.Error($"[UI] UIPrefab 实例化失败: {UIUtility.LogUIType(info.UIType)}");
+                UILogger.Error($"[UI] UIPrefab 实例化失败: {info.PageType.Name}");
                 return null;
             }
             
 #if UNITY_EDITOR
-            go.name = UIUtility.LogUIType(info.UIType);
+            go.name = info.PageType.Name;
 #endif
 
             IPage page = go.AddComponent(info.PageType) as IPage;

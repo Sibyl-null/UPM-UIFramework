@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UIFramework.Runtime.EventBus;
 using UIFramework.Runtime.InfoContainer;
@@ -26,38 +27,30 @@ namespace UIFramework.Runtime.QueueDriver
         private const int EventOrder = 10;
         
         private readonly IPageController _pageController;
-        
         private readonly List<QueueInfo> _infoList = new List<QueueInfo>();
-        private int? _nowUIType;
 
-        internal int? NowUIType
-        {
-            get => _nowUIType;
-            set => _nowUIType = value;
-        }
-        
+        internal Type NowPageType { get; set; }
         internal List<QueueInfo> InfoList => _infoList;
 
         public UIQueueDriver(IPageController pageController, IEventBus eventBus)
         {
             _pageController = pageController;
-            
             eventBus.Register(EventType.CloseAfterAnim, TryDequeueQueueInfo, EventOrder);
         }
         
         public void Release()
         {
-            _nowUIType = null;
+            NowPageType = null;
             _infoList.Clear();
         }
 
         public void EnqueueQueueInfo(UIInfo uiInfo, IPageArg arg, int policy)
         {
-            if (_nowUIType == null && _infoList.Count == 0)
+            if (NowPageType == null && _infoList.Count == 0)
             {
                 UIAsyncHandle handle = _pageController.OpenPage(uiInfo, arg);
                 if (handle != null)
-                    _nowUIType = uiInfo.UIType;
+                    NowPageType = uiInfo.PageType;
                 
                 return;
             }
@@ -68,10 +61,10 @@ namespace UIFramework.Runtime.QueueDriver
 
         internal void TryDequeueQueueInfo(UIInfo info)
         {
-            if (_nowUIType == null || _nowUIType != info.UIType)
+            if (NowPageType == null || NowPageType != info.PageType)
                 return;
 
-            _nowUIType = null;
+            NowPageType = null;
             if (_infoList.Count == 0)
                 return;
 
@@ -80,7 +73,7 @@ namespace UIFramework.Runtime.QueueDriver
 
             UIAsyncHandle handle = _pageController.OpenPage(queueInfo.UIInfo, queueInfo.Arg);
             if (handle != null)
-                _nowUIType = queueInfo.UIInfo.UIType;
+                NowPageType = queueInfo.UIInfo.PageType;
         }
     }
 }

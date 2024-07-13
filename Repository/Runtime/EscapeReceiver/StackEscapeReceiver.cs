@@ -54,13 +54,13 @@ namespace UIFramework.Runtime.EscapeReceiver
                 
                 if (page == null)
                 {
-                    UILogger.Error($"[UI] 页面不存在: {UIUtility.LogUIType(infos[i].UIType)}" );
+                    UILogger.Error($"[UI] 页面不存在: {infos[i].PageType.Name}" );
                     return;
                 }
                 
                 if (page.InputActive == false)
                 {
-                    UILogger.Info($"[UI] {UIUtility.LogUIType(infos[i].UIType)} 页面禁用输入中，不处理返回键");
+                    UILogger.Info($"[UI] {infos[i].PageType.Name} 页面禁用输入中，不处理返回键");
                     return;
                 }
                 

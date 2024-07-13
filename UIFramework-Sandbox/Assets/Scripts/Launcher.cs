@@ -77,43 +77,43 @@ public class Launcher : MonoBehaviour
     [Button, BoxGroup("TestTwo")]
     private void CreateTestTwoPage()
     {
-        UIManager.Instance.CreatePage(UIType.TestTwo);
+        UIManager.Instance.CreatePage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]
     private void OpenTestTwoPage()
     {
-        UIManager.Instance.OpenPage<TestTwoPage>(UIType.TestTwo);
+        UIManager.Instance.OpenPage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]
     private void CloseTestTwoPage()
     {
-        UIManager.Instance.ClosePage(UIType.TestTwo);
+        UIManager.Instance.ClosePage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]
     private void DestroyTestTwoPage()
     {
-        UIManager.Instance.DestroyPage(UIType.TestTwo);
+        UIManager.Instance.DestroyPage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]
     private void OpenQueueTestTwoPage()
     {
-        UIManager.Instance.OpenQueuePage(UIType.TestTwo);
+        UIManager.Instance.OpenQueuePage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]
     private void CloseTestTwoPageNoAnim()
     {
-        UIManager.Instance.ClosePage(UIType.TestTwo, false);
+        UIManager.Instance.ClosePage<TestTwoPage>(false);
     }
     
     [Button, BoxGroup("TestTwo")]
     private void DestroyTestTwoPageNoAnim()
     {
-        UIManager.Instance.DestroyPage(UIType.TestTwo, false);
+        UIManager.Instance.DestroyPage<TestTwoPage>(false);
     }
     
     // -----------------------------------------------------------------------------
@@ -121,42 +121,42 @@ public class Launcher : MonoBehaviour
     [Button, BoxGroup("TestThree")]
     private void CreateTestThreePage()
     {
-        UIManager.Instance.CreatePage(UIType.TestThree);
+        UIManager.Instance.CreatePage<TestThreePage>();
     }
     
     [Button, BoxGroup("TestThree")]
     private void OpenTestThreePage()
     {
-        UIManager.Instance.OpenPage(UIType.TestThree);
+        UIManager.Instance.OpenPage<TestThreePage>();
     }
     
     [Button, BoxGroup("TestThree")]
     private void CloseTestThreePage()
     {
-        UIManager.Instance.ClosePage(UIType.TestThree);
+        UIManager.Instance.ClosePage<TestThreePage>();
     }
     
     [Button, BoxGroup("TestThree")]
     private void DestroyTestThreePage()
     {
-        UIManager.Instance.DestroyPage(UIType.TestThree);
+        UIManager.Instance.DestroyPage<TestThreePage>();
     }
     
     [Button, BoxGroup("TestThree")]
     private void OpenQueueTestThreePage()
     {
-        UIManager.Instance.OpenQueuePage(UIType.TestThree);
+        UIManager.Instance.OpenQueuePage<TestThreePage>();
     }
     
     [Button, BoxGroup("TestThree")]
     private void CloseTestThreePageNoAnim()
     {
-        UIManager.Instance.ClosePage(UIType.TestThree, false);
+        UIManager.Instance.ClosePage<TestThreePage>(false);
     }
     
     [Button, BoxGroup("TestThree")]
     private void DestroyTestThreePageNoAnim()
     {
-        UIManager.Instance.DestroyPage(UIType.TestThree, false);
+        UIManager.Instance.DestroyPage<TestThreePage>(false);
     }
 }
