@@ -7,6 +7,8 @@ using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.PageFactory;
 using UIFramework.Runtime.Utility;
+using UnityEngine;
+using EventType = UIFramework.Runtime.EventBus.EventType;
 
 namespace UIFramework.Runtime.PageController
 {
@@ -52,14 +54,14 @@ namespace UIFramework.Runtime.PageController
 
         public IPage CreatePage(UIInfo info)
         {
-            IPage page = GetPage(info);
-            if (page != null)
+            IPage p = GetPage(info);
+            if (p != null)
             {
                 UILogger.Warning($"[UI] Page 已存在: {info.PageType.Name}");
-                return page;
+                return p;
             }
             
-            page = _pageFactory.CreatePage(info);
+            (IPage page, GameObject go) = _pageFactory.CreatePage(info);
             if (page == null)
             {
                 UILogger.Error($"[UI] Page 创建失败: {info.PageType.Name}");
@@ -69,7 +71,7 @@ namespace UIFramework.Runtime.PageController
             _pageDic.Add(info.PageType, page);
             
             _eventBus.Dispatch(EventType.CreateBefore, info);
-            page.Create(info, _sortingLayerName);
+            page.Create(info, _sortingLayerName, go);
             _eventBus.Dispatch(EventType.CreateAfter, info);
             
             return page;

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace UIFramework.Runtime.Page
 {
-    public abstract class BasePage : MonoBehaviour, IPage
+    public abstract class BasePage : IPage
     {
         private PageBehaviourLogic _behaviourLogic;
         
@@ -93,11 +93,11 @@ namespace UIFramework.Runtime.Page
         // IPage 接口实现
         // ------------------------------------------------------------------------
         
-        void IPage.Create(UIInfo info, string sortingLayerName)
+        void IPage.Create(UIInfo info, string sortingLayerName, GameObject go)
         {
             UIInfo = info;
             
-            BaseUI = GetComponent<BaseUI>();
+            BaseUI = go.GetComponent<BaseUI>();
             BaseUI.GetComponent<RectTransform>().NormalizeTransform();
             BaseUI.Canvas.overrideSorting = true;
             BaseUI.Canvas.sortingLayerName = sortingLayerName;

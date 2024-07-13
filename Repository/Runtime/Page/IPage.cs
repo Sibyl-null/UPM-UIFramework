@@ -1,5 +1,6 @@
 using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.Utility;
+using UnityEngine;
 
 namespace UIFramework.Runtime.Page
 {
@@ -13,7 +14,7 @@ namespace UIFramework.Runtime.Page
         bool IsPlayingAnim { get; }
         bool InputActive { get; }
 
-        void Create(UIInfo info, string sortingLayerName);
+        void Create(UIInfo info, string sortingLayerName, GameObject go);
         UIAsyncHandle Open(IPageArg arg = null);
         UIAsyncHandle Close(bool closeAnim);
         void Destroy();

@@ -1,3 +1,4 @@
+using System;
 using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
@@ -6,23 +7,23 @@ using UnityEngine;
 
 namespace UIFramework.Runtime.PageFactory
 {
-    public class MonoPageFactory : IPageFactory
+    public class PurePageFactory : IPageFactory
     {
         private readonly IResLoader _resLoader;
         private readonly ILayerController _layerController;
         
-        public MonoPageFactory(IResLoader resLoader, ILayerController layerController)
+        public PurePageFactory(IResLoader resLoader, ILayerController layerController)
         {
             _resLoader = resLoader;
             _layerController = layerController;
         }
         
-        public IPage CreatePage(UIInfo info)
+        public (IPage page, GameObject go) CreatePage(UIInfo info)
         {
             if (typeof(IPage).IsAssignableFrom(info.PageType) == false)
             {
                 UILogger.Error($"[UI] {info.PageType.Name} 未实现 IPage 接口");
-                return null;
+                return (null, null);
             }
             
             Transform parent = _layerController.GetOrAddLayer(info.Layer);
@@ -31,18 +32,18 @@ namespace UIFramework.Runtime.PageFactory
             if (go == null)
             {
                 UILogger.Error($"[UI] UIPrefab 实例化失败: {info.PageType.Name}");
-                return null;
+                return (null, null);
             }
             
 #if UNITY_EDITOR
             go.name = info.PageType.Name;
 #endif
 
-            IPage page = go.AddComponent(info.PageType) as IPage;
+            IPage page =Activator.CreateInstance(info.PageType) as IPage;
             if (page == null)
-                return null;
-            
-            return page;
+                return (null, null);
+
+            return (page, go);
         }
     }
 }

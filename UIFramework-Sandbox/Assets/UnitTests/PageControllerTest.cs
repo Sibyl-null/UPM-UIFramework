@@ -30,7 +30,7 @@ namespace UnitTests
             IPage page = SubstitutePage();
             _pageFactory = Substitute.For<IPageFactory>();
             _pageFactory.CreatePage(default)
-                .ReturnsForAnyArgs(page);
+                .ReturnsForAnyArgs((page, new GameObject()));
             
             _layerController = Substitute.For<ILayerController>();
             _layerController.GetOrAddLayer(default)
@@ -69,7 +69,7 @@ namespace UnitTests
             Received.InOrder(() =>
             {
                 _eventBus.Dispatch(EventType.CreateBefore, info);
-                page.Create(info, SortingLayerName);
+                page.Create(info, SortingLayerName, Arg.Any<GameObject>());
                 _eventBus.Dispatch(EventType.CreateAfter, info);
                 
                 _eventBus.Dispatch(EventType.OpenBeforeAnim, info);
@@ -96,7 +96,7 @@ namespace UnitTests
             // assert
             Assert.AreNotEqual(null, handle);
             
-            page.DidNotReceiveWithAnyArgs().Create(default, default);
+            page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             _layerController.Received(1).AddPageInOrder(info.Layer, page);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CreateBefore, info);
@@ -127,7 +127,7 @@ namespace UnitTests
             // assert
             Assert.AreEqual(null, handle);
             
-            page.DidNotReceiveWithAnyArgs().Create(default, default);
+            page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             page.DidNotReceiveWithAnyArgs().Open();
             _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default, default);
             
@@ -154,7 +154,7 @@ namespace UnitTests
             // assert
             Assert.AreEqual(null, handle);
             
-            page.DidNotReceiveWithAnyArgs().Create(default, default);
+            page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             page.DidNotReceiveWithAnyArgs().Open();
             _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default, default);
             
@@ -384,7 +384,7 @@ namespace UnitTests
             Received.InOrder(() =>
             {
                 _eventBus.Dispatch(EventType.CreateBefore, info);
-                page.Create(info, SortingLayerName);
+                page.Create(info, SortingLayerName, Arg.Any<GameObject>());
                 _eventBus.Dispatch(EventType.CreateAfter, info);
             });
         }
@@ -404,7 +404,7 @@ namespace UnitTests
             // assert
             Assert.AreEqual(page, newPage);
             
-            page.DidNotReceiveWithAnyArgs().Create(default, default);
+            page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             _eventBus.DidNotReceive().Dispatch(EventType.CreateBefore, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CreateAfter, info);
         }
