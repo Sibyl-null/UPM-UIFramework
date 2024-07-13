@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="VisualElement" class="unity-box" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
+        <ui:TextField picking-mode="Ignore" label="UIType" name="UITypeField" password="false" />
+        <ui:DropdownField label="UILayer" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="UILayerDrop" />
+        <ui:TextField picking-mode="Ignore" label="LoadPath" name="LoadPathField" />
+    </ui:VisualElement>
+    <ui:VisualElement class="unity-box" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
+        <ui:TextField picking-mode="Ignore" label="UIScriptPath" name="UIScriptPathField" />
+        <ui:TextField picking-mode="Ignore" label="PageScriptPath" name="PageScriptPathField" />
+        <ui:Label enable-rich-text="true" text="⚠ 仅在新建页面时使用, 并确保代码已编译完成" style="margin-left: 3px; margin-right: 3px; margin-top: 5px; margin-bottom: 3px; color: rgb(255, 169, 0);" />
+    </ui:VisualElement>
+    <ui:Button text="首次代码生成" display-tooltip-when-elided="true" name="GenButton" style="height: 23px; margin-top: 4px;" />
+    <ui:Button text="强制代码生成" display-tooltip-when-elided="true" name="ForceGenButton" style="height: 23px; margin-top: 4px;" />
+</ui:UXML>

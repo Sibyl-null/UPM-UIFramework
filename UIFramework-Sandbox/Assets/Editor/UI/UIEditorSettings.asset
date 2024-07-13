@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60568e0d72241eea108c5d53508ed19, type: 3}
+  m_Name: UIEditorSettings
+  m_EditorClassIdentifier: 
+  TemplateUIPrefab: {fileID: 846360921254828453, guid: 5e5e193461ceb4f90b0bdb44de5c8785,
+    type: 3}
+  UITypeAssemblyQualifiedName: UI.Core.UIType, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  UILayerAssemblyQualifiedName: UI.Core.UILayer, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  DefaultUILayer: Dialog
+  UIPrefabLoadFolders:
+  - {fileID: 102900000, guid: 05e6791a54d134799b203acdf7061c7d, type: 3}
+  UITypeFilePath: Assets/Scripts/UI/Core/UIType.cs
+  UITypeTemplate: {fileID: 4900000, guid: 1cce07c4a17144baa6a5bc717680ccba, type: 3}
+  UIInfoFilePath: Assets/Scripts/UI/Core/UIManager_Info.cs
+  UIInfoTemplate: {fileID: 4900000, guid: 5fab1016f8ec4514a85ec939c50ef1cf, type: 3}
+  PageGenFolder: Assets/Scripts/UI/Page
+  PageNamespace: UI.Page
+  PageTemplate: {fileID: 4900000, guid: 0458d0ed185354accb7f03809602ec2b, type: 3}
+  BaseUIGenFolder: Assets/Gen/UI
+  BaseUITemplate: {fileID: 4900000, guid: f0f2429f4aeb45c58ab33f8183a03221, type: 3}
+  GenSupports:
+  - TypeName: GameObject
+    GenSuffix: Go
+  - TypeName: RectTransform
+    GenSuffix: Trans
+  - TypeName: Image
+    GenSuffix: Img
+  - TypeName: Button
+    GenSuffix: Btn
+  - TypeName: Text
+    GenSuffix: Text
+  - TypeName: LangText
+    GenSuffix: Text
+  - TypeName: Canvas
+    GenSuffix: Canvas
+  - TypeName: UIToggle
+    GenSuffix: Toggle
+  - TypeName: ResizeText
+    GenSuffix: Text
+  - TypeName: TextMeshProUGUI
+    GenSuffix: Tmp

@@ -1,0 +1,92 @@
+using System.Collections.Generic;
+using NSubstitute;
+using NUnit.Framework;
+using UI.Runtime.EscapeReceiver;
+using UI.Runtime.EventBus;
+using UI.Runtime.InfoContainer;
+using UI.Runtime.Page;
+using UI.Runtime.PageController;
+
+namespace UnitTests
+{
+    public class StackEscapeReceiverTest
+    {
+        [Test]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        public void _07_ProcessEscape_With_Consume(int index)
+        {
+            // arrange
+            IPageController controller = Substitute.For<IPageController>();
+            IEventBus eventBus = Substitute.For<IEventBus>();
+            StackEscapeReceiver strategy = new StackEscapeReceiver(controller, eventBus);
+
+            List<IPage> pageList = new List<IPage>();
+            for (int i = 0; i < 3; ++i)
+            {
+                UIInfo info = new UIInfo(i, default,default, default);
+                IPage page = Substitute.For<IPage>();
+
+                page.InputActive.Returns(true);
+                page.CanConsumeEscape().Returns(i <= index);
+                controller.GetPage(info).Returns(page);
+
+                strategy.Infos.Add(info);
+                pageList.Add(page);
+            }
+
+            // act
+            strategy.ProcessEscape();
+            
+            // assert
+            for (int i = 0; i < 3; ++i)
+            {
+                IPage page = pageList[i];
+                if (i == index)
+                    page.Received(1).OnEscape();
+                else
+                    page.DidNotReceive().OnEscape();
+            }
+        }
+        
+        [Test]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        public void _08_ProcessEscape_With_InputActive(int index)
+        {
+            // arrange
+            IPageController controller = Substitute.For<IPageController>();
+            IEventBus eventBus = Substitute.For<IEventBus>();
+            StackEscapeReceiver strategy = new StackEscapeReceiver(controller, eventBus);
+
+            List<IPage> pageList = new List<IPage>();
+            for (int i = 0; i < 3; ++i)
+            {
+                UIInfo info = new UIInfo(i, default,default, default);
+                IPage page = Substitute.For<IPage>();
+
+                page.InputActive.Returns(i != index);
+                page.CanConsumeEscape().Returns(false);
+                controller.GetPage(info).Returns(page);
+
+                strategy.Infos.Add(info);
+                pageList.Add(page);
+            }
+
+            // act
+            strategy.ProcessEscape();
+            
+            // assert
+            for (int i = 0; i < 3; ++i)
+            {
+                IPage page = pageList[i];
+                if (i <= index)
+                    page.DidNotReceive().CanConsumeEscape();
+                else
+                    page.Received(1).CanConsumeEscape();
+            }
+        }
+    }
+}

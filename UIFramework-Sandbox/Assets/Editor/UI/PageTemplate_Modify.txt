@@ -1,0 +1,25 @@
+{{~ for $namespace in dep_namespace_set ~}}
+using {{ $namespace }};
+{{~ end ~}}
+
+namespace UI.Page
+{
+    [UICodeGen((int)UIType.{{ ui_type }}, (int)UILayer.{{ ui_layer }}, "{{ load_path }}")]
+    public class {{ page_class_name }} : GamePage<{{ ui_class_name }}>
+    {   
+        protected override void OnInit()
+        {
+            base.OnInit();
+        }
+
+        protected override void OnPrepare(IPageArg arg = null)
+        {
+            base.OnPrepare(arg);
+        }
+
+        protected override void OnClear()
+        {
+            base.OnClear();
+        }
+    }
+}

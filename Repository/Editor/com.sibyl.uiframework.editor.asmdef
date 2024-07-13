@@ -1,0 +1,20 @@
+{
+    "name": "com.sibyl.uiframework.editor",
+    "rootNamespace": "UI.Editor",
+    "references": [
+        "GUID:7dba046bb4dd145e18ab37222b3392c0"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Scriban.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
