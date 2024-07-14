@@ -1,9 +1,0 @@
-namespace UI.Core
-{
-    public enum UIType
-    {
-        {{~ for $ui_type in ui_type_dic ~}}
-        {{ $ui_type.key }},
-        {{~ end ~}}
-    }
-}

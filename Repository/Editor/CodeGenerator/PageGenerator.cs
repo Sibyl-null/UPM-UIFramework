@@ -7,7 +7,6 @@ namespace UIFramework.Editor.CodeGenerator
     {
         internal class GenData
         {
-            public string UiType;
             public string UiLayer;
             public string LoadPath;
             public string PageClassName;

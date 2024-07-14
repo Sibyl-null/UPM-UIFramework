@@ -24,16 +24,11 @@ namespace UIFramework.Editor
         
         [Header("公共配置")]
         public GameObject TemplateUIPrefab;
-        public string UITypeAssemblyQualifiedName;
         public string UILayerAssemblyQualifiedName;
         [Tooltip("打开 CodeGenWindow 时，默认选中的层级")]
         public string DefaultUILayer;
         [Tooltip("UI Prefab 需要处于这些目录下，默认加载路径会自动剔除文件夹的路径，若为 Resources 目录还会剔除后缀")]
         public List<DefaultAsset> UIPrefabLoadFolders;
-
-        [Header("UIType 生成配置")]
-        public string UITypeFilePath;
-        public TextAsset UITypeTemplate;
         
         [Header("UIInfo 生成配置")]
         public string UIInfoFilePath;
@@ -85,11 +80,9 @@ namespace UIFramework.Editor
 
         private static void SetDefaultData(UIEditorSettings settings)
         {
-            settings.UITypeAssemblyQualifiedName = "UI.Core.UIType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
             settings.UILayerAssemblyQualifiedName = "UI.Core.UILayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
             settings.DefaultUILayer = "Dialog";
             settings.UIInfoFilePath = "Assets/Scripts/UI/Core/UIManager_Info.cs";
-            settings.UITypeFilePath = "Assets/Scripts/UI/Core/UIType.cs";
             settings.PageGenFolder = "Assets/Scripts/UI/Page";
             settings.BaseUIGenFolder = "Assets/Gen/UI";
             settings.PageNamespace = "UI.Page";
@@ -97,7 +90,6 @@ namespace UIFramework.Editor
             settings.PageTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(PageTemplatePath);
             settings.BaseUITemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(BaseUITemplatePath);
             settings.UIInfoTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(UIInfoTemplatePath);
-            settings.UITypeTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(UITypeTemplatePath);
             settings.GenSupports = new List<GenItem>()
             {
                 new GenItem("GameObject", "Go"),

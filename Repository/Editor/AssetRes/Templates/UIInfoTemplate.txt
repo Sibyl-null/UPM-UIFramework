@@ -11,15 +11,15 @@ namespace UI.Core
 {
     public partial class UIManager
     {
-        private void AddInfo(UIType uiType, UILayer layer, Type pageType, string loadPath)
+        private void AddInfo(Type pageType, UILayer layer, string loadPath)
         {
-            InfoContainer.AddInfo(new UIInfo((int)uiType, (int)layer, pageType, loadPath));
+            InfoContainer.AddInfo(new UIInfo(pageType, (int)layer, loadPath));
         }
         
         private void LoadInfos()
         {
             {{~ for $item in info_items ~}}
-            AddInfo(UIType.{{ $item.ui_type }}, UILayer.{{ $item.layer }}, typeof({{ $item.page_type }}), "{{ $item.load_path }}");
+            AddInfo(typeof({{ $item.page_type }}), UILayer.{{ $item.layer }}, "{{ $item.load_path }}");
             {{~ end ~}}
         }
     }

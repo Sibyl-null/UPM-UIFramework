@@ -120,13 +120,6 @@ namespace UIFramework.Editor
             UIInfoGenerator.Generate();
             AssetDatabase.Refresh();
         }
-
-        [MenuItem("Project/UI/Generate UIType", false, GenerateCodePriority)]
-        public static void GenerateUIType()
-        {
-            UITypeGenerator.Generate(null);
-            AssetDatabase.Refresh();
-        }
         
         
         // ------------------------------------------------------------------------

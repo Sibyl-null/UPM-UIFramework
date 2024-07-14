@@ -4,7 +4,7 @@ using UIFramework.Runtime.Page;
 
 namespace UI.Page
 {
-    [UICodeGen((int)UIType.TestTwo, (int)UILayer.Dialog, "TestTwoUI")]
+    [UICodeGen((int)UILayer.Dialog, "TestTwoUI")]
     public class TestTwoPage : GamePage<TestTwoUI>
     {   
         protected override void OnInit()

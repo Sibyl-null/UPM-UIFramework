@@ -19,7 +19,6 @@ namespace UIFramework.Editor.UICodeGenWindow
             GetWindow<UICodeGenWindow>("UICodeGenWindow");
         }
 
-        private TextField _uiTypeField;
         private DropdownField _uiLayerDrop;
         private TextField _loadPathField;
         private TextField _uiScriptPathField;
@@ -62,7 +61,6 @@ namespace UIFramework.Editor.UICodeGenWindow
         
         private void GetUIElements()
         {
-            _uiTypeField = rootVisualElement.Q<TextField>("UITypeField");
             _uiLayerDrop = rootVisualElement.Q<DropdownField>("UILayerDrop");
             _loadPathField = rootVisualElement.Q<TextField>("LoadPathField");
             _uiScriptPathField = rootVisualElement.Q<TextField>("UIScriptPathField");
@@ -78,10 +76,6 @@ namespace UIFramework.Editor.UICodeGenWindow
                 throw new Exception("[UI] No Prefab is selected.");
             
             _settings = UIEditorSettings.MustLoad();
-            
-            _uiTypeType = Type.GetType(_settings.UITypeAssemblyQualifiedName);
-            if (_uiTypeType == null)
-                throw new Exception("[UI] EditorSettings: UITypeAssemblyQualifiedName is invalid.");
             
             _uiLayerType = Type.GetType(_settings.UILayerAssemblyQualifiedName);
             if (_uiLayerType == null)
@@ -116,14 +110,15 @@ namespace UIFramework.Editor.UICodeGenWindow
         
         private void InitializeUI()
         {
-            _uiTypeField.value = _selectedPrefab.name.TrimEnd("UI".ToCharArray());
+            string pageName = _selectedPrefab.name.TrimEnd("UI".ToCharArray()) + "Page";
+            
             _uiLayerDrop.choices = Enum.GetNames(_uiLayerType).ToList();
             if (Enum.IsDefined(_uiLayerType, _settings.DefaultUILayer))
                 _uiLayerDrop.value = _settings.DefaultUILayer;
             
             _loadPathField.value = _loadPath;
             _uiScriptPathField.value = $"{_settings.BaseUIGenFolder}/{_selectedPrefab.name}.cs";
-            _pageScriptPathField.value = $"{_settings.PageGenFolder}/{_uiTypeField.value}Page.cs";
+            _pageScriptPathField.value = $"{_settings.PageGenFolder}/{pageName}.cs";
             _genButton.clicked += OnGenButton;
             _forceGenButton.clicked += OnForceGenButton;
         }
@@ -146,12 +141,6 @@ namespace UIFramework.Editor.UICodeGenWindow
 
         private bool VerifyGenParameters()
         {
-            if (Enum.IsDefined(_uiTypeType, _uiTypeField.value))
-            {
-                EditorUtility.DisplayDialog("生成失败", "UIType 已存在", "确认");
-                return false;
-            }
-
             if (string.IsNullOrEmpty(_uiLayerDrop.value))
             {
                 EditorUtility.DisplayDialog("生成失败", "UILayer 不能为空", "确认");
@@ -191,7 +180,6 @@ namespace UIFramework.Editor.UICodeGenWindow
 
             PageGenerator.Generate(_pageScriptPathField.value, new PageGenerator.GenData
             {
-                UiType = _uiTypeField.value,
                 UiLayer = _uiLayerDrop.value,
                 LoadPath = _loadPathField.value,
                 PageClassName = Path.GetFileNameWithoutExtension(_pageScriptPathField.value),
@@ -205,13 +193,10 @@ namespace UIFramework.Editor.UICodeGenWindow
             
             UIInfoGenerator.GenerateWithNewInfo(new UIInfoGenerator.InfoItem
             {
-                UiType = _uiTypeField.value,
-                Layer = _uiLayerDrop.value,
                 PageType = Path.GetFileNameWithoutExtension(_pageScriptPathField.value),
+                Layer = _uiLayerDrop.value,
                 LoadPath = _loadPathField.value
             }, _settings.PageNamespace);
-            
-            UITypeGenerator.Generate(_uiTypeField.value);
             
             AssetDatabase.Refresh();
         }

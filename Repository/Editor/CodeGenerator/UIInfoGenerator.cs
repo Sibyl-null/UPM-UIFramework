@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UIFramework.Runtime;
 using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
 using UnityEditor;
 
 namespace UIFramework.Editor.CodeGenerator
@@ -13,9 +14,8 @@ namespace UIFramework.Editor.CodeGenerator
     {
         internal class InfoItem
         {
-            public string UiType;
-            public string Layer;
             public string PageType;
+            public string Layer;
             public string LoadPath;
         }
         
@@ -53,48 +53,31 @@ namespace UIFramework.Editor.CodeGenerator
         {
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             
-            Type uiTypeType = Type.GetType(settings.UITypeAssemblyQualifiedName);
-            if (uiTypeType == null)
-                throw new Exception("[UI] EditorSettings: UITypeAssemblyQualifiedName is invalid.");
-            
             Type uiLayerType = Type.GetType(settings.UILayerAssemblyQualifiedName);
             if (uiLayerType == null)
                 throw new Exception("[UI] EditorSettings: UILayerAssemblyQualifiedName is invalid.");
-            
-            int[] uiTypes = (int[])Enum.GetValues(uiTypeType);
-            List<Type> pageTypes = TypeCache.GetTypesWithAttribute<UICodeGenAttribute>().ToList();
 
             GenData data = new GenData();
-            data.NamespaceSet.Add(uiTypeType.Namespace);
             data.NamespaceSet.Add(uiLayerType.Namespace);
             data.NamespaceSet.Add(typeof(UIInfoContainer).Namespace);
-            
-            foreach (Type pageType in pageTypes)
-            {
-                List<UICodeGenAttribute> genAttributes = pageType.GetCustomAttributes<UICodeGenAttribute>().ToList();
-                foreach (UICodeGenAttribute genAttribute in genAttributes)
-                {
-                    if (uiTypes.Contains(genAttribute.UIType) == false)
-                        continue;
-                    
-                    data.NamespaceSet.Add(pageType.Namespace);
-                    data.InfoItems.Add(new InfoItem
-                    {
-                        UiType = Enum.GetName(uiTypeType, genAttribute.UIType),
-                        Layer = Enum.GetName(uiLayerType, genAttribute.Layer),
-                        PageType = pageType.Name,
-                        LoadPath = genAttribute.LoadPath
-                    });
-                }
-            }
-            
-            data.InfoItems.Sort((a, b) =>
-            {
-                int x = (int)Enum.Parse(uiTypeType, a.UiType);
-                int y = (int)Enum.Parse(uiTypeType, b.UiType);
-                return x.CompareTo(y);
-            });
 
+            List<Type> types = TypeCache.GetTypesWithAttribute<UICodeGenAttribute>().ToList();
+            foreach (Type type in types)
+            {
+                if (typeof(IPage).IsAssignableFrom(type) == false)
+                    throw new Exception($"UICodeGenAttribute 只能用在实现 IPage 接口的类上: {type.FullName}");
+                
+                data.NamespaceSet.Add(type.Namespace);
+                data.InfoItems.Add(new InfoItem
+                {
+                    PageType = type.Name,
+                    Layer = Enum.GetName(uiLayerType, type.GetCustomAttribute<UICodeGenAttribute>().Layer),
+                    LoadPath = type.GetCustomAttribute<UICodeGenAttribute>().LoadPath
+                });
+            }
+
+            data.InfoItems.Sort((a, b) =>
+                String.Compare(a.PageType, b.PageType, StringComparison.Ordinal));
             return data;
         }
     }

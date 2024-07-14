@@ -1,6 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <ui:VisualElement name="VisualElement" class="unity-box" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
-        <ui:TextField picking-mode="Ignore" label="UIType" name="UITypeField" password="false" />
         <ui:DropdownField label="UILayer" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="UILayerDrop" />
         <ui:TextField picking-mode="Ignore" label="LoadPath" name="LoadPathField" />
     </ui:VisualElement>
