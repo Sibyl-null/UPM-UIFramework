@@ -28,6 +28,7 @@ namespace UIFramework.Editor.CodeGenerator
         private class GenData
         {
             public string PrefabName;
+            public string SelfNamespace;
             public HashSet<string> Namespaces = new HashSet<string>();
             public Dictionary<string, string> GoNamePathMap = new Dictionary<string, string>();
             public List<FieldData> Fields = new List<FieldData>();
@@ -48,8 +49,11 @@ namespace UIFramework.Editor.CodeGenerator
         private static void VerifySetting()
         {
             UIEditorSettings settings = UIEditorSettings.MustLoad();
-            if (string.IsNullOrEmpty(settings.BaseUIGenFolder))
-                throw new Exception("[UI] EditorSettings 未设置 BaseUIGenFolder");
+            if (string.IsNullOrEmpty(settings.RootGenFolder))
+                throw new Exception("[UI] EditorSettings 未设置 RootGenFolder");
+            
+            if (string.IsNullOrEmpty(settings.RootNamespace))
+                throw new Exception("[UI] EditorSettings 未设置 RootNamespace");
             
             if (settings.BaseUITemplate == null)
                 throw new Exception("[UI] EditorSettings 未设置 BaseUI 代码模板文件");
@@ -59,8 +63,14 @@ namespace UIFramework.Editor.CodeGenerator
         {
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             
+            MonoScript script = UIEditorUtility.LoadMonoScriptAsset(selectedGo.name);
+            string selfNamespace = script != null
+                ? script.GetClass().Namespace
+                : $"{settings.RootNamespace}.{selectedGo.name.TrimUIEnd()}";
+            
             GenData data = new GenData();
             data.PrefabName = selectedGo.name;
+            data.SelfNamespace = selfNamespace;
             data.Namespaces.Add(typeof(BaseUI).Namespace);
             data.Namespaces.Add(typeof(UIRaycast).Namespace);
             data.Namespaces.Add("UnityEngine");
@@ -124,7 +134,7 @@ namespace UIFramework.Editor.CodeGenerator
             MonoScript script = UIEditorUtility.LoadMonoScriptAsset(data.PrefabName);
             string filePath = script != null
                 ? AssetDatabase.GetAssetPath(script)
-                : $"{settings.BaseUIGenFolder}/{data.PrefabName}.cs";
+                : $"{settings.RootGenFolder}/{data.PrefabName.TrimUIEnd()}/{data.PrefabName}.cs";
 
             bool codeChanged = script == null || script.text != code;
             

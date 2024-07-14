@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e2c398421a43a7abf7a89503b6834e, type: 3}
   m_Name: UIRuntimeSettings
   m_EditorClassIdentifier: 
-  GameObjectLayerValue: 5
+  GoLayerName: UI
   SortingLayerName: UI
   PageOrderRange: 50

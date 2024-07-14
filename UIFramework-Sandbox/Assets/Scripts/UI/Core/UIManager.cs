@@ -1,5 +1,4 @@
 using UIFramework.Runtime;
-using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UI.Core
@@ -15,8 +14,6 @@ namespace UI.Core
                 UILogger.Error("[UI] UIManager has already been created");
                 return;
             }
-            
-            UIUtility.SetUILayerLogger(uiLayer => ((UILayer)uiLayer).ToString());
             
             Instance = new UIManager();
             Instance.InitInternal(canvas, new UIResLoader());

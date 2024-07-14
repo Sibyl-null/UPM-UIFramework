@@ -11,7 +11,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Scriban.dll"
+        "Scriban.dll",
+        "Sirenix.Serialization.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

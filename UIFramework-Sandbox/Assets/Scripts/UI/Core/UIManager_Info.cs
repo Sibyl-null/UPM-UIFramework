@@ -3,24 +3,22 @@
 // </auto-generated>
 
 using System;
+using System.Collections.Generic;
 using UI.Core;
 using UIFramework.Runtime.InfoContainer;
-using UI.Page;
+using UIFramework.Runtime;
 
 namespace UI.Core
 {
     public partial class UIManager
     {
-        private void AddInfo(Type pageType, UILayer layer, string loadPath)
+        private void AddInfo(Type pageType, int layer, string loadPath)
         {
-            InfoContainer.AddInfo(new UIInfo(pageType, (int)layer, loadPath));
+            InfoContainer.AddInfo(new UIInfo(pageType, layer, loadPath));
         }
         
         private void LoadInfos()
         {
-            AddInfo(typeof(TestOnePage), UILayer.Dialog, "TestOneUI");
-            AddInfo(typeof(TestTwoPage), UILayer.Dialog, "TestTwoUI");
-            AddInfo(typeof(TestThreePage), UILayer.Dialog, "TestThreeUI");
         }
     }
 }

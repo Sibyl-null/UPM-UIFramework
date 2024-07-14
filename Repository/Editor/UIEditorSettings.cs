@@ -24,23 +24,17 @@ namespace UIFramework.Editor
         
         [Header("公共配置")]
         public GameObject TemplateUIPrefab;
-        public string UILayerAssemblyQualifiedName;
-        [Tooltip("打开 CodeGenWindow 时，默认选中的层级")]
-        public string DefaultUILayer;
-        [Tooltip("UI Prefab 需要处于这些目录下，默认加载路径会自动剔除文件夹的路径，若为 Resources 目录还会剔除后缀")]
+        [Tooltip("UI Prefab 需要处于这些目录下")]
         public List<DefaultAsset> UIPrefabLoadFolders;
         
         [Header("UIInfo 生成配置")]
         public string UIInfoFilePath;
         public TextAsset UIInfoTemplate;
         
-        [Header("Page 生成配置")]
-        public string PageGenFolder;
-        public string PageNamespace;
+        [Header("Page/BaseUI 生成配置")]
+        public string RootGenFolder;
+        public string RootNamespace;
         public TextAsset PageTemplate;
-        
-        [Header("BaseUI 生成配置")]
-        public string BaseUIGenFolder;
         public TextAsset BaseUITemplate;
         public List<GenItem> GenSupports;
         
@@ -53,7 +47,6 @@ namespace UIFramework.Editor
         private const string BaseUITemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/BaseUITemplate.txt";
         private const string UIInfoTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/UIInfoTemplate.txt";
         private const string PageTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/PageTemplate.txt";
-        private const string UITypeTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/UITypeTemplate.txt";
         
         [MenuItem("Project/UI/Create EditorSettings", false, UIMenuItems.ProjectInitPriority)]
         public static void CreateAsset()
@@ -80,12 +73,9 @@ namespace UIFramework.Editor
 
         private static void SetDefaultData(UIEditorSettings settings)
         {
-            settings.UILayerAssemblyQualifiedName = "UI.Core.UILayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
-            settings.DefaultUILayer = "Dialog";
             settings.UIInfoFilePath = "Assets/Scripts/UI/Core/UIManager_Info.cs";
-            settings.PageGenFolder = "Assets/Scripts/UI/Page";
-            settings.BaseUIGenFolder = "Assets/Gen/UI";
-            settings.PageNamespace = "UI.Page";
+            settings.RootGenFolder = "Assets/Scripts/UI";
+            settings.RootNamespace = "UI";
             settings.TemplateUIPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TemplateUIPrefabPath);
             settings.PageTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(PageTemplatePath);
             settings.BaseUITemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(BaseUITemplatePath);

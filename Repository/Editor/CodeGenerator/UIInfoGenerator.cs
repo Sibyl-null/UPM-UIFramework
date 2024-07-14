@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UIFramework.Runtime;
 using UIFramework.Runtime.InfoContainer;
-using UIFramework.Runtime.Page;
 using UnityEditor;
+using UnityEngine;
 
 namespace UIFramework.Editor.CodeGenerator
 {
@@ -24,19 +23,6 @@ namespace UIFramework.Editor.CodeGenerator
             public HashSet<string> NamespaceSet = new HashSet<string>();
             public List<InfoItem> InfoItems = new List<InfoItem>();
         }
-
-        internal static void GenerateWithNewInfo(InfoItem infoItem, string pageNamespace)
-        {
-            GenData data = GetGenData();
-            data.NamespaceSet.Add(pageNamespace);
-            data.InfoItems.Add(infoItem);
-            
-            UIEditorSettings settings = UIEditorSettings.MustLoad();
-            string code = UIEditorUtility.ScribanGenerateText(settings.UIInfoTemplate.text, data);
-            UIEditorUtility.OverlayWriteTextFile(settings.UIInfoFilePath, code);
-            
-            UILogger.Info("[UI] UIInfo 代码生成成功! " + settings.UIInfoFilePath);
-        }
         
         internal static void Generate()
         {
@@ -52,27 +38,34 @@ namespace UIFramework.Editor.CodeGenerator
         private static GenData GetGenData()
         {
             UIEditorSettings settings = UIEditorSettings.MustLoad();
-            
-            Type uiLayerType = Type.GetType(settings.UILayerAssemblyQualifiedName);
-            if (uiLayerType == null)
-                throw new Exception("[UI] EditorSettings: UILayerAssemblyQualifiedName is invalid.");
+            string[] folders = settings.UIPrefabLoadFolders.Select(AssetDatabase.GetAssetPath).ToArray();
 
             GenData data = new GenData();
-            data.NamespaceSet.Add(uiLayerType.Namespace);
             data.NamespaceSet.Add(typeof(UIInfoContainer).Namespace);
 
-            List<Type> types = TypeCache.GetTypesWithAttribute<UICodeGenAttribute>().ToList();
-            foreach (Type type in types)
+            string[] guids = AssetDatabase.FindAssets("t:prefab", folders);
+            foreach (string guid in guids)
             {
-                if (typeof(IPage).IsAssignableFrom(type) == false)
-                    throw new Exception($"UICodeGenAttribute 只能用在实现 IPage 接口的类上: {type.FullName}");
+                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                GameObject uiPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+                
+                BaseUI baseUI = uiPrefab.GetComponent<BaseUI>();
+                if (baseUI == null)
+                    continue;
+                
+                string pageTypeName = uiPrefab.name.TrimEnd("UI".ToCharArray()) + "Page";
+                string pageTypeFullName = $"{baseUI.GetType().Namespace}.{pageTypeName}";
+                
+                Type type = Type.GetType(pageTypeFullName);
+                if (type == null)
+                    throw new Exception($"不存在 {pageTypeFullName} 的类型: {assetPath}");
                 
                 data.NamespaceSet.Add(type.Namespace);
                 data.InfoItems.Add(new InfoItem
                 {
                     PageType = type.Name,
-                    Layer = Enum.GetName(uiLayerType, type.GetCustomAttribute<UICodeGenAttribute>().Layer),
-                    LoadPath = type.GetCustomAttribute<UICodeGenAttribute>().LoadPath
+                    Layer = baseUI.LayerName,
+                    LoadPath = assetPath
                 });
             }
 

@@ -118,5 +118,10 @@ namespace UIFramework.Editor
             
             throw new Exception($"Not found So file : {soType.Name}");
         }
+        
+        internal static string TrimUIEnd(this string str)
+        {
+            return str.TrimEnd("UI".ToCharArray());
+        }
     }
 }

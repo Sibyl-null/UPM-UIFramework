@@ -14,17 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TemplateUIPrefab: {fileID: 846360921254828453, guid: 5e5e193461ceb4f90b0bdb44de5c8785,
     type: 3}
-  UILayerAssemblyQualifiedName: UI.Core.UILayer, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  DefaultUILayer: Dialog
   UIPrefabLoadFolders:
   - {fileID: 102900000, guid: 05e6791a54d134799b203acdf7061c7d, type: 3}
   UIInfoFilePath: Assets/Scripts/UI/Core/UIManager_Info.cs
   UIInfoTemplate: {fileID: 4900000, guid: 5fab1016f8ec4514a85ec939c50ef1cf, type: 3}
-  PageGenFolder: Assets/Scripts/UI/Page
-  PageNamespace: UI.Page
+  RootGenFolder: Assets/Scripts/UI
+  RootNamespace: UI
   PageTemplate: {fileID: 4900000, guid: 0458d0ed185354accb7f03809602ec2b, type: 3}
-  BaseUIGenFolder: Assets/Gen/UI
   BaseUITemplate: {fileID: 4900000, guid: f0f2429f4aeb45c58ab33f8183a03221, type: 3}
   GenSupports:
   - TypeName: GameObject
