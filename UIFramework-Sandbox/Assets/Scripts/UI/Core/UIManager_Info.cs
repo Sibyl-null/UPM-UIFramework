@@ -19,8 +19,8 @@ namespace UI.Core
         private void LoadInfos()
         {
             AddInfo(typeof(TestOnePage), UILayer.Dialog, "TestOneUI");
-            AddInfo(typeof(TestThreePage), UILayer.Dialog, "TestThreeUI");
             AddInfo(typeof(TestTwoPage), UILayer.Dialog, "TestTwoUI");
+            AddInfo(typeof(TestThreePage), UILayer.Dialog, "TestThreeUI");
         }
     }
 }

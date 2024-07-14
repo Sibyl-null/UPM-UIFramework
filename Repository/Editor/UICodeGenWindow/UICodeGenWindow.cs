@@ -28,7 +28,6 @@ namespace UIFramework.Editor.UICodeGenWindow
         
         private GameObject _selectedPrefab;
         private UIEditorSettings _settings;
-        private Type _uiTypeType;
         private Type _uiLayerType;
         private string _loadPath;
         
@@ -186,8 +185,9 @@ namespace UIFramework.Editor.UICodeGenWindow
                 UiClassName = Path.GetFileNameWithoutExtension(_uiScriptPathField.value),
                 DepNamespaceSet = new HashSet<string>()
                 {
-                    _uiTypeType.Namespace, _uiLayerType.Namespace, 
-                    typeof(UICodeGenAttribute).Namespace, typeof(IPageArg).Namespace
+                    _uiLayerType.Namespace, 
+                    typeof(UICodeGenAttribute).Namespace,
+                    typeof(IPageArg).Namespace
                 }
             });
             
