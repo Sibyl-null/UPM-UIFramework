@@ -193,7 +193,7 @@ namespace UIFramework.Editor
             rect.sizeDelta = new Vector2(100, 100);
             
             go.AddComponent<UIRaycast>();
-            go.layer = settings.GameObjectLayerValue;
+            go.layer = LayerMask.NameToLayer(settings.GoLayerName);
             
             Selection.activeGameObject = go;
             EditorUtility.SetDirty(go);

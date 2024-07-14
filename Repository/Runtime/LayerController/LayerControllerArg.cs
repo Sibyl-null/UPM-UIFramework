@@ -20,7 +20,7 @@ namespace UIFramework.Runtime.LayerController
         public LayerControllerArg(Transform root, UIRuntimeSettings settings)
         {
             Root = root;
-            GoLayerValue = settings.GameObjectLayerValue;
+            GoLayerValue = LayerMask.NameToLayer(settings.GoLayerName);
             SortingLayerName = settings.SortingLayerName;
             PageOrderRange = settings.PageOrderRange;
         }

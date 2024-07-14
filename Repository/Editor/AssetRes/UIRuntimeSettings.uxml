@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <uie:LayerField label="Game Object Layer Value" binding-path="GameObjectLayerValue" />
-    <ui:TextField picking-mode="Ignore" label="Sorting Layer Name" binding-path="SortingLayerName" />
-    <uie:IntegerField label="Page Order Range" value="0" binding-path="PageOrderRange" />
-</ui:UXML>
