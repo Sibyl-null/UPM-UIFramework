@@ -1,11 +1,9 @@
 using UI.Core;
-{{~ for $namespace in dep_namespace_set ~}}
-using {{ $namespace }};
-{{~ end ~}}
+using UIFramework.Runtime.Page;
 
-namespace {{ self_namespace }}
+namespace UI.TestOne
 {
-    public class {{ page_class_name }} : GamePage<{{ ui_class_name }}>
+    public class TestOnePage : GamePage<TestOneUI>
     {   
         protected override void OnInit()
         {

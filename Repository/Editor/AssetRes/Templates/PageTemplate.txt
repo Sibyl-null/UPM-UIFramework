@@ -2,9 +2,8 @@
 using {{ $namespace }};
 {{~ end ~}}
 
-namespace UI.Page
+namespace {{ self_namespace }}
 {
-    [UICodeGen((int)UILayer.{{ ui_layer }}, "{{ load_path }}")]
     public class {{ page_class_name }} : BasePage
     {
         private {{ ui_class_name }} _ui;

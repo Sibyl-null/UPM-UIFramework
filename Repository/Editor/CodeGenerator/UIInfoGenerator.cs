@@ -53,17 +53,10 @@ namespace UIFramework.Editor.CodeGenerator
                 if (baseUI == null)
                     continue;
                 
-                string pageTypeName = uiPrefab.name.TrimEnd("UI".ToCharArray()) + "Page";
-                string pageTypeFullName = $"{baseUI.GetType().Namespace}.{pageTypeName}";
-                
-                Type type = Type.GetType(pageTypeFullName);
-                if (type == null)
-                    throw new Exception($"不存在 {pageTypeFullName} 的类型: {assetPath}");
-                
-                data.NamespaceSet.Add(type.Namespace);
+                data.NamespaceSet.Add(baseUI.GetType().Namespace);
                 data.InfoItems.Add(new InfoItem
                 {
-                    PageType = type.Name,
+                    PageType = uiPrefab.name.TrimUIEnd() + "Page",
                     Layer = baseUI.LayerName,
                     LoadPath = assetPath
                 });

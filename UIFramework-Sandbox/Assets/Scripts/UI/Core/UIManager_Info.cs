@@ -3,10 +3,8 @@
 // </auto-generated>
 
 using System;
-using System.Collections.Generic;
-using UI.Core;
 using UIFramework.Runtime.InfoContainer;
-using UIFramework.Runtime;
+using UI.TestOne;
 
 namespace UI.Core
 {
@@ -19,6 +17,7 @@ namespace UI.Core
         
         private void LoadInfos()
         {
+            AddInfo(typeof(TestOnePage), Settings.LayerOrders["Dialog"], "Assets/Resources/TestOneUI.prefab");
         }
     }
 }

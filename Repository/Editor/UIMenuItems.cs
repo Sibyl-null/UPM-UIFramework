@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using UIFramework.Editor.CodeGenerator;
 using UIFramework.Runtime;
+using UIFramework.Runtime.Page;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -173,6 +174,30 @@ namespace UIFramework.Editor
             }
             
             BaseUIGenerator.Generate(go);
+            AssetDatabase.Refresh();
+        }
+        
+        [MenuItem("Assets/InitUIScript #a", false, AssetsPriority)]
+        public static void InitUIScript()
+        {
+            GameObject go = Selection.activeGameObject;
+            if (go == null)
+            {
+                UILogger.Error("[UI] InitUIScript 未选中任何 Prefab");
+                return;
+            }
+            
+            MonoScript script = UIEditorUtility.LoadMonoScriptAsset(go.name.TrimUIEnd() + "Page");
+            if (script != null)
+            {
+                EditorUtility.DisplayDialog("失败", $"{script.name} 脚本已存在", "确定");
+                return;
+            }
+            
+            BaseUIGenerator.Generate(go);
+            PageGenerator.Generate(go);
+            UIInfoGenerator.Generate();
+            
             AssetDatabase.Refresh();
         }
         
