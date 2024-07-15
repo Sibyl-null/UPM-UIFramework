@@ -196,9 +196,9 @@ namespace UIFramework.Editor
             
             BaseUIGenerator.Generate(go);
             PageGenerator.Generate(go);
-            UIInfoGenerator.Generate();
-            
             AssetDatabase.Refresh();
+            
+            EditorUtility.DisplayDialog("初始脚本成功", "请指定 Layer 后，手动生成 UIInfo", "确定");
         }
         
         
