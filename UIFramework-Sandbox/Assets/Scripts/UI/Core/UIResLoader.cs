@@ -9,6 +9,8 @@ namespace UI.Core
     {
         public GameObject LoadAndInstantiatePrefab(string path, Transform parent)
         {
+            path = path.Replace("Assets/Resources/", "").Replace(".prefab", "");
+            
             GameObject prefab = Resources.Load<GameObject>(path);
             if (prefab == null)
             {

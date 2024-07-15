@@ -5,6 +5,7 @@
 using System;
 using UIFramework.Runtime.InfoContainer;
 using UI.TestOne;
+using UI.TestTwo;
 
 namespace UI.Core
 {
@@ -18,6 +19,7 @@ namespace UI.Core
         private void LoadInfos()
         {
             AddInfo(typeof(TestOnePage), Settings.LayerOrders["Dialog"], "Assets/Resources/TestOneUI.prefab");
+            AddInfo(typeof(TestTwoPage), Settings.LayerOrders["Dialog"], "Assets/Resources/TestTwoUI.prefab");
         }
     }
 }
