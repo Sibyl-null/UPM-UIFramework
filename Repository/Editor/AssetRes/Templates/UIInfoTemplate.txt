@@ -19,7 +19,7 @@ namespace UI.Core
         private void LoadInfos()
         {
             {{~ for $item in info_items ~}}
-            AddInfo(typeof({{ $item.page_type }}), Settings.LayerOrders["{{ $item.layer }}"], "{{ $item.load_path }}");
+            AddInfo(typeof({{ $item.page_type }}), Settings.GetLayerOrder("{{ $item.layer }}"), "{{ $item.load_path }}");
             {{~ end ~}}
         }
     }

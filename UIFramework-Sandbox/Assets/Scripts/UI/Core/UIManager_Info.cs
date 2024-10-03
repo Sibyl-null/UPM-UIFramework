@@ -18,8 +18,8 @@ namespace UI.Core
         
         private void LoadInfos()
         {
-            AddInfo(typeof(TestOnePage), Settings.LayerOrders["Dialog"], "Assets/Resources/TestOneUI.prefab");
-            AddInfo(typeof(TestTwoPage), Settings.LayerOrders["Dialog"], "Assets/Resources/TestTwoUI.prefab");
+            AddInfo(typeof(TestOnePage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestOneUI.prefab");
+            AddInfo(typeof(TestTwoPage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestTwoUI.prefab");
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,9 @@ namespace UIFramework.Runtime
     public abstract class BaseUI : MonoBehaviour
     {
 #if UNITY_EDITOR
-        [ValueDropdown("GetAllLayerName")]
+#if ODIN_INSPECTOR
+        [Sirenix.OdinInspector.ValueDropdown("GetAllLayerName")]
+#endif
         public string LayerName;
 
         private string[] GetAllLayerName()
@@ -17,7 +18,7 @@ namespace UIFramework.Runtime
             string guid = UnityEditor.AssetDatabase.FindAssets("t:UIRuntimeSettings").Single();
             string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
             var settings = UnityEditor.AssetDatabase.LoadAssetAtPath<UIRuntimeSettings>(path);
-            return settings.LayerOrders.Keys.ToArray();
+            return settings.LayerInfos.Select(x => x.Name).ToArray();
         }
 #endif
         

@@ -101,8 +101,10 @@ namespace UIFramework.Runtime.LayerController
         private Transform AddLayer(int layer)
         {
             GameObject go = new GameObject();
-            go.gameObject.name = UIUtility.LogUILayer(layer);
             go.layer = _arg.GoLayerValue;
+#if UNITY_EDITOR
+            go.gameObject.name = UIUtility.LogUILayer(layer);
+#endif
             
             RectTransform rectTrans = go.AddComponent<RectTransform>();
             rectTrans.NormalizeTransform();
