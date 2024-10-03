@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UIFramework.Editor.CodeGenerator;
 using UIFramework.Runtime;
-using UIFramework.Runtime.Page;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -94,20 +93,12 @@ namespace UIFramework.Editor
         // ------------------------------------------------------------------------
 
         private const string InitialProjectPackagePath =
-            "Packages/com.beatles.unity.ui/Editor/AssetRes/Packages/InitialProject.unitypackage";
-        private const string ExtensionPackagePath =
-            "Packages/com.beatles.unity.ui/Editor/AssetRes/Packages/Extension.unitypackage";
+            "Packages/com.sibyl.uiframework/Editor/AssetRes/Packages/InitialProject.unitypackage";
         
         [MenuItem("Project/UI/Import Packages/Initial Project", false, ImportPackagePriority)]
         public static void ImportInitialProjectPackage()
         {
             AssetDatabase.ImportPackage(InitialProjectPackagePath, true);
-        }
-        
-        [MenuItem("Project/UI/Import Packages/Extension", false, ImportPackagePriority)]
-        public static void ImportExtensionPackage()
-        {
-            AssetDatabase.ImportPackage(ExtensionPackagePath, true);
         }
         
         
