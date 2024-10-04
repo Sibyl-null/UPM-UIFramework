@@ -5,7 +5,7 @@ using UnityEngine;
 namespace UI.Core
 {
     /** 替换为项目中自己的加载方式 */
-    public class UIResLoader : IResLoader
+    public class UIResLoader : IUIResLoader
     {
         public GameObject LoadAndInstantiatePrefab(string path, Transform parent)
         {

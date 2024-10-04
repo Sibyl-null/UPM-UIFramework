@@ -9,10 +9,10 @@ namespace UIFramework.Runtime.PageFactory
 {
     public class PurePageFactory : IPageFactory
     {
-        private readonly IResLoader _resLoader;
+        private readonly IUIResLoader _resLoader;
         private readonly ILayerController _layerController;
         
-        public PurePageFactory(IResLoader resLoader, ILayerController layerController)
+        public PurePageFactory(IUIResLoader resLoader, ILayerController layerController)
         {
             _resLoader = resLoader;
             _layerController = layerController;

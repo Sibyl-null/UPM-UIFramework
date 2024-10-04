@@ -27,14 +27,14 @@ namespace UIFramework.Runtime
 
         public IEventBus EventBus { get; protected set; }
         
-        protected IResLoader ResLoader { get; set; }
+        protected IUIResLoader ResLoader { get; set; }
         protected ILayerController LayerController { get; set; }
         protected IPageFactory PageFactory { get; set; }
         protected IPageController PageController { get; set; }
         protected IEscapeReceiver EscapeReceiver { get; set; }
         protected IQueueDriver QueueDriver { get; set; }
 
-        protected virtual void InitInternal(Canvas canvas, IResLoader resLoader)
+        protected virtual void InitInternal(Canvas canvas, IUIResLoader resLoader)
         {
             UICanvas = canvas;
             UIScaler = canvas.GetComponent<CanvasScaler>();
