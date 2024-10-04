@@ -1,6 +1,6 @@
 {
   "name": "com.sibyl.uiframework",
-  "version": "1.0.0-preview2",
+  "version": "1.0.0-preview3",
   "displayName": "UIFramework",
   "description": "UI framework base on UGUI",
   "unity": "2022.3",
