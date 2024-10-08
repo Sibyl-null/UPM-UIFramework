@@ -1,5 +1,4 @@
-using System;
-using UIFramework.Runtime.InfoContainer;
+﻿using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.ResLoader;
@@ -7,12 +6,12 @@ using UnityEngine;
 
 namespace UIFramework.Runtime.PageFactory
 {
-    public class PurePageFactory : IPageFactory
+    public class MonoPageFactory : IPageFactory
     {
         private readonly IUIResLoader _resLoader;
         private readonly ILayerController _layerController;
         
-        public PurePageFactory(IUIResLoader resLoader, ILayerController layerController)
+        public MonoPageFactory(IUIResLoader resLoader, ILayerController layerController)
         {
             _resLoader = resLoader;
             _layerController = layerController;
@@ -39,9 +38,12 @@ namespace UIFramework.Runtime.PageFactory
             go.name = info.PageType.Name;
 #endif
 
-            IPage page =Activator.CreateInstance(info.PageType) as IPage;
+            IPage page = go.GetComponent<IPage>();
             if (page == null)
+            {
+                UILogger.Error($"[UI] {go.name} 未添加实现 IPage 组件");
                 return (null, null);
+            }
 
             return (page, go);
         }

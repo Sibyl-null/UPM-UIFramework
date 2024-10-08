@@ -2,19 +2,23 @@ using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UIFramework.Runtime.Page
 {
-    public abstract class BasePage : IPage
+    [RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]
+    public abstract class BasePage : MonoBehaviour, IPage
     {
         private PageBehaviourLogic _behaviourLogic;
         
         public bool IsOpening => _behaviourLogic.IsOpening;
         public bool IsPlayingAnim => _behaviourLogic.IsPlayingAnim;
-        public bool InputActive => EventSystem.current.enabled && !BaseUI.Raycast.raycastTarget;
+        public bool InputActive => EventSystem.current.enabled && !UIRaycast.raycastTarget;
 
-        public UIInfo UIInfo { get; private set; }
-        public BaseUI BaseUI { get; private set; }
+        protected UIInfo UIInfo { get; private set; }
+        protected Canvas Canvas { get; private set; }
+        protected GraphicRaycaster GraphicRaycaster { get; private set; }
+        protected UIRaycast UIRaycast { get; private set; }
         
         
         // ------------------------------------------------------------------------
@@ -74,18 +78,18 @@ namespace UIFramework.Runtime.Page
         
         public virtual void SetInputActive(bool isActive)
         {
-            BaseUI.Raycast.raycastTarget = !isActive;
+            UIRaycast.raycastTarget = !isActive;
         }
 
         public virtual void SetVisible(bool isVisible)
         {
-            BaseUI.Canvas.enabled = isVisible;
-            BaseUI.Raycaster.enabled = isVisible;
+            Canvas.enabled = isVisible;
+            GraphicRaycaster.enabled = isVisible;
         }
         
         public virtual void SetOrder(int order)
         {
-            BaseUI.Canvas.sortingOrder = order;
+            Canvas.sortingOrder = order;
         }
 
 
@@ -96,11 +100,13 @@ namespace UIFramework.Runtime.Page
         void IPage.Create(UIInfo info, string sortingLayerName, GameObject go)
         {
             UIInfo = info;
+            Canvas = go.GetComponent<Canvas>();
+            GraphicRaycaster = go.GetComponent<GraphicRaycaster>();
+            UIRaycast = go.transform.Find("Raycast").GetComponent<UIRaycast>();
             
-            BaseUI = go.GetComponent<BaseUI>();
-            BaseUI.GetComponent<RectTransform>().NormalizeTransform();
-            BaseUI.Canvas.overrideSorting = true;
-            BaseUI.Canvas.sortingLayerName = sortingLayerName;
+            GetComponent<RectTransform>().NormalizeTransform();
+            Canvas.overrideSorting = true;
+            Canvas.sortingLayerName = sortingLayerName;
 
             _behaviourLogic = new PageBehaviourLogic(this);
             _behaviourLogic.Create();
@@ -119,7 +125,7 @@ namespace UIFramework.Runtime.Page
         void IPage.Destroy()
         {
             _behaviourLogic.Destroy();
-            GameObject.Destroy(BaseUI.gameObject);
+            Object.Destroy(gameObject);
         }
 
         void IPage.PlayInAnimation(UIAsyncHandle handle)

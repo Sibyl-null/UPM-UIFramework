@@ -9,19 +9,6 @@ namespace UIFramework.Editor
 {
     public class UIEditorSettings : ScriptableObject
     {
-        [Serializable]
-        public struct GenItem
-        {
-            public string TypeName;
-            public string GenSuffix;
-
-            public GenItem(string typeName, string genSuffix)
-            {
-                TypeName = typeName;
-                GenSuffix = genSuffix;
-            }
-        }
-        
         [Header("公共配置")]
         public GameObject TemplateUIPrefab;
         [Tooltip("UI Prefab 需要处于这些目录下")]
@@ -31,12 +18,11 @@ namespace UIFramework.Editor
         public string UIInfoFilePath;
         public TextAsset UIInfoTemplate;
         
-        [Header("Page/BaseUI 生成配置")]
+        [Header("Page 生成配置")]
         public string RootGenFolder;
         public string RootNamespace;
         public TextAsset PageTemplate;
-        public TextAsset BaseUITemplate;
-        public List<GenItem> GenSupports;
+        
         
         // ------------------------------------------------------------------------
         // methods
@@ -44,7 +30,6 @@ namespace UIFramework.Editor
 
         private const string DefaultSavePath = "Assets/Editor/UI/UIEditorSettings.asset";
         private const string TemplateUIPrefabPath = "Packages/com.beatles.unity.ui/Editor/AssetRes/ZTemplateUI.prefab";
-        private const string BaseUITemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/BaseUITemplate.txt";
         private const string UIInfoTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/UIInfoTemplate.txt";
         private const string PageTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/PageTemplate.txt";
         
@@ -78,21 +63,7 @@ namespace UIFramework.Editor
             settings.RootNamespace = "UI";
             settings.TemplateUIPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TemplateUIPrefabPath);
             settings.PageTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(PageTemplatePath);
-            settings.BaseUITemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(BaseUITemplatePath);
             settings.UIInfoTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(UIInfoTemplatePath);
-            settings.GenSupports = new List<GenItem>()
-            {
-                new GenItem("GameObject", "Go"),
-                new GenItem("RectTransform", "Trans"),
-                new GenItem("Image", "Img"),
-                new GenItem("Button", "Btn"),
-                new GenItem("Text", "Text"),
-                new GenItem("LangText", "Text"),
-                new GenItem("Canvas", "Canvas"),
-                new GenItem("UIToggle", "Toggle"),
-                new GenItem("ResizeText", "Text"),
-                new GenItem("TextMeshProUGUI", "Tmp")
-            };
         }
         
         public static UIEditorSettings MustLoad()

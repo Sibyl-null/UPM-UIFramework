@@ -49,17 +49,13 @@ namespace UIFramework.Editor.CodeGenerator
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 GameObject uiPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
                 
-                BaseUI baseUI = uiPrefab.GetComponent<BaseUI>();
-                if (baseUI == null)
-                    continue;
-                
-                data.NamespaceSet.Add(baseUI.GetType().Namespace);
-                data.InfoItems.Add(new InfoItem
-                {
-                    PageType = uiPrefab.name.TrimUIEnd() + "Page",
-                    Layer = baseUI.LayerName,
-                    LoadPath = assetPath
-                });
+                // data.NamespaceSet.Add(baseUI.GetType().Namespace);
+                // data.InfoItems.Add(new InfoItem
+                // {
+                //     PageType = uiPrefab.name.TrimUIEnd() + "Page",
+                //     Layer = baseUI.LayerName,
+                //     LoadPath = assetPath
+                // });
             }
 
             data.InfoItems.Sort((a, b) =>

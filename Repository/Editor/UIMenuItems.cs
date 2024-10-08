@@ -153,20 +153,6 @@ namespace UIFramework.Editor
             
             return selectedPath;
         }
-
-        [MenuItem("Assets/Generate Base UI #z", false, AssetsPriority)]
-        public static void GenerateBaseUI()
-        {
-            GameObject go = Selection.activeGameObject;
-            if (go == null)
-            {
-                UILogger.Error("[UI] BaseUIGenerator 未选中任何 Prefab");
-                return;
-            }
-            
-            BaseUIGenerator.Generate(go);
-            AssetDatabase.Refresh();
-        }
         
         [MenuItem("Assets/InitUIScript #a", false, AssetsPriority)]
         public static void InitUIScript()
@@ -185,7 +171,6 @@ namespace UIFramework.Editor
                 return;
             }
             
-            BaseUIGenerator.Generate(go);
             PageGenerator.Generate(go);
             AssetDatabase.Refresh();
             

@@ -3,7 +3,7 @@ using UIFramework.Runtime.Page;
 
 namespace UI.TestOne
 {
-    public class TestOnePage : GamePage<TestOneUI>
+    public class TestOnePage : GamePage
     {   
         protected override void OnInit()
         {

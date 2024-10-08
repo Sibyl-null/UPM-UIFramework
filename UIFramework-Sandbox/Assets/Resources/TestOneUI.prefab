@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 805697567281412587}
   - component: {fileID: 1786876559912309392}
   - component: {fileID: 7714897520406959555}
-  - component: {fileID: -8069904432287687587}
+  - component: {fileID: 1914656559429967}
   m_Layer: 5
   m_Name: TestOneUI
   m_TagString: Untagged
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-8069904432287687587
+--- !u!114 &1914656559429967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -353,25 +353,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4638572103687878605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc647a67d2e632d40a7ce3b962e55b98, type: 3}
+  m_Script: {fileID: 11500000, guid: fc73ed7a2382840e0bb194029c0808c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerName: Dialog
-  Canvas: {fileID: 7082614783223408453}
-  Raycaster: {fileID: 805697567281412587}
-  Content: {fileID: 4537381157517837838}
-  BlackImage: {fileID: 7714897520406959555}
-  Raycast: {fileID: 3435240459182868149}
-  TitleTrans: {fileID: 4269773194776394111}
-  TitleTmp: {fileID: 7738306457673030379}
-  TitleGo: {fileID: 8627615511957707485}
-  IconTrans: {fileID: 9028842644404087707}
-  IconImg: {fileID: 3541251904374746644}
-  IconGo: {fileID: 7902050116217710075}
-  ChangedBtnTrans: {fileID: 3052501180396190660}
-  ChangedBtnImg: {fileID: 6925605791896633754}
-  ChangedBtnBtn: {fileID: 6953177781767388272}
-  ChangedBtnGo: {fileID: 2329910268104726227}
 --- !u!1 &6590214294396895710
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ namespace UIFramework.Runtime
             EventBus = new UIEventBus();
             InfoContainer = new UIInfoContainer();
             LayerController = new UILayerController(new LayerControllerArg(Root, Settings));
-            PageFactory = new PurePageFactory(ResLoader, LayerController);
+            PageFactory = new MonoPageFactory(ResLoader, LayerController);
             PageController = new UIPageController(PageFactory, LayerController, EventBus, Settings.SortingLayerName);
             EscapeReceiver = new StackEscapeReceiver(PageController, EventBus);
             QueueDriver = new UIQueueDriver(PageController, EventBus);
