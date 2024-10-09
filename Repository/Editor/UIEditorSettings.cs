@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UIFramework.Runtime;
+using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 

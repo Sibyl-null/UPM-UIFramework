@@ -1,8 +1,10 @@
 using UI.Core;
 using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 
 namespace UI.TestOne
 {
+    [UICodeGen("Dialog")]
     public class TestOnePage : GamePage
     {   
         protected override void OnInit()

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UIFramework.Runtime;
+using System.Reflection;
 using UIFramework.Runtime.InfoContainer;
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 
@@ -48,14 +50,22 @@ namespace UIFramework.Editor.CodeGenerator
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 GameObject uiPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-                
-                // data.NamespaceSet.Add(baseUI.GetType().Namespace);
-                // data.InfoItems.Add(new InfoItem
-                // {
-                //     PageType = uiPrefab.name.TrimUIEnd() + "Page",
-                //     Layer = baseUI.LayerName,
-                //     LoadPath = assetPath
-                // });
+
+                BasePage page = uiPrefab.GetComponent<BasePage>();
+                if (page == null)
+                    continue;
+
+                UICodeGenAttribute attribute = page.GetType().GetCustomAttribute<UICodeGenAttribute>();
+                if (attribute == null)
+                    throw new Exception($"{page.GetType().Name} 脚本缺少 UICodeGenAttribute 特性");
+
+                data.NamespaceSet.Add(page.GetType().Namespace);
+                data.InfoItems.Add(new InfoItem
+                {
+                    PageType = page.GetType().Name,
+                    Layer = attribute.LayerName,
+                    LoadPath = assetPath
+                });
             }
 
             data.InfoItems.Sort((a, b) =>

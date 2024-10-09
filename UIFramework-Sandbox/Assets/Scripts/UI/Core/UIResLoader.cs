@@ -1,5 +1,6 @@
 using UIFramework.Runtime;
 using UIFramework.Runtime.ResLoader;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UI.Core

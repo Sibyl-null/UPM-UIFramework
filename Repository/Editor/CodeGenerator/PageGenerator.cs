@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UIFramework.Runtime;
 using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UIFramework.Editor.CodeGenerator

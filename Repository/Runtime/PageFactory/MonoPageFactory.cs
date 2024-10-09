@@ -2,6 +2,7 @@
 using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.ResLoader;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UIFramework.Runtime.PageFactory

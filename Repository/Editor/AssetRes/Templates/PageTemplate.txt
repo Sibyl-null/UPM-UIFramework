@@ -4,14 +4,12 @@ using {{ $namespace }};
 
 namespace {{ self_namespace }}
 {
-    public class {{ page_class_name }} : BasePage
+    [UICodeGen("{{ layer_name }}")]
+    public class {{ page_class_name }} : GamePage
     {
-        private {{ ui_class_name }} _ui;
-        
         protected override void OnInit()
         {
             base.OnInit();
-            _ui = ({{ ui_class_name }})BaseUI;
         }
 
         protected override void OnPrepare(IPageArg arg = null)

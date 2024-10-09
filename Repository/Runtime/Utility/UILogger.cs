@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UIFramework.Runtime
+namespace UIFramework.Runtime.Utility
 {
     public static class UILogger
     {

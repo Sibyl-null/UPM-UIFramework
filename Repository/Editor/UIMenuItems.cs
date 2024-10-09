@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using UIFramework.Editor.CodeGenerator;
 using UIFramework.Runtime;
+using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
