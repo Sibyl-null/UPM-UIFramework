@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UIFramework.Editor.CodeGenerator;
 using UIFramework.Runtime;
-using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -32,7 +31,7 @@ namespace UIFramework.Editor
         {
             if (File.Exists(RuntimeSettingsPath))
             {
-                UILogger.Warning("[UI] 目标路径已存在文件 " + RuntimeSettingsPath);
+                Debug.LogWarning("[UI] 目标路径已存在文件 " + RuntimeSettingsPath);
                 return;
             }
 
@@ -46,7 +45,7 @@ namespace UIFramework.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             EditorGUIUtility.PingObject(so);
-            UILogger.Info($"[UI] {RuntimeSettingsPath} 创建成功");
+            Debug.Log($"[UI] {RuntimeSettingsPath} 创建成功");
         }
         
             
@@ -60,7 +59,7 @@ namespace UIFramework.Editor
             AddFlags(tagsProp, new List<string> { AutoTag });
 
             tagManager.ApplyModifiedProperties();
-            UILogger.Info("[UI] SetTags success");
+            Debug.Log("[UI] SetTags success");
         }
 
         private static void AddFlags(SerializedProperty flagProp, List<string> flags)
@@ -125,14 +124,14 @@ namespace UIFramework.Editor
             string path = GetSelectedPath();
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
             {
-                UILogger.Error("[UI] please select a folder to create template ui");
+                Debug.LogError("[UI] please select a folder to create template ui");
                 return;
             }
 
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             if (settings.TemplateUIPrefab == null)
             {
-                UILogger.Error("[UI] EditorSettings TemplateUIPrefab is null");
+                Debug.LogError("[UI] EditorSettings TemplateUIPrefab is null");
                 return;
             }
                 
@@ -161,7 +160,7 @@ namespace UIFramework.Editor
             GameObject go = Selection.activeGameObject;
             if (go == null)
             {
-                UILogger.Error("[UI] InitUIScript 未选中任何 Prefab");
+                Debug.LogError("[UI] InitUIScript 未选中任何 Prefab");
                 return;
             }
             

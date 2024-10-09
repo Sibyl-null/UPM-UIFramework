@@ -34,7 +34,7 @@ namespace UIFramework.Editor.CodeGenerator
 
             string savePath = $"{settings.RootGenFolder}/{go.name.TrimUIEnd()}/{data.PageClassName}.cs";
             UIEditorUtility.OverlayWriteTextFile(savePath, code);
-            UILogger.Info("[UI] PageGenerator Finished");
+            Debug.Log("[UI] PageGenerator Finished");
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,7 +37,7 @@ namespace UIFramework.Editor
         {
             if (File.Exists(DefaultSavePath))
             {
-                UILogger.Warning("[UI] 目标路径已存在文件 " + DefaultSavePath);
+                Debug.LogWarning("[UI] 目标路径已存在文件 " + DefaultSavePath);
                 return;
             }
 
@@ -53,7 +52,7 @@ namespace UIFramework.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             EditorGUIUtility.PingObject(so);
-            UILogger.Info($"[UI] {DefaultSavePath} 创建成功");
+            Debug.Log($"[UI] {DefaultSavePath} 创建成功");
         }
 
         private static void SetDefaultData(UIEditorSettings settings)

@@ -2,8 +2,6 @@ using System;
 using System.IO;
 using Scriban;
 using Scriban.Runtime;
-using UIFramework.Runtime;
-using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -25,7 +23,7 @@ namespace UIFramework.Editor
             if (template.HasErrors)
             {
                 foreach (var error in template.Messages)
-                    UILogger.Error(error.ToString());
+                    Debug.LogError(error.ToString());
 
                 throw new Exception("[UI] 文本生成失败，Scriban 模板解析出错");
             }
@@ -38,7 +36,7 @@ namespace UIFramework.Editor
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                UILogger.Error("[UI] filePath 为空");
+                Debug.LogError("[UI] filePath 为空");
                 return;
             }
             

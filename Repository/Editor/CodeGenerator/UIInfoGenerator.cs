@@ -34,7 +34,7 @@ namespace UIFramework.Editor.CodeGenerator
             string code = UIEditorUtility.ScribanGenerateText(settings.UIInfoTemplate.text, data);
             UIEditorUtility.OverlayWriteTextFile(settings.UIInfoFilePath, code);
             
-            UILogger.Info("[UI] UIInfo 代码生成成功! " + settings.UIInfoFilePath);
+            Debug.Log("[UI] UIInfo 代码生成成功! " + settings.UIInfoFilePath);
         }
 
         private static GenData GetGenData()
