@@ -10,9 +10,7 @@ namespace UIFramework.Editor
     public static class UIMenuItems
     {
         public const int ProjectInitPriority = 1000;
-        private const int ImportPackagePriority = 1500;
         private const int GenerateCodePriority = 2000;
-        
         private const int GameObjectPriority = 3000;
         public const int AssetsPriority = 4000;
 
@@ -22,6 +20,8 @@ namespace UIFramework.Editor
         // ------------------------------------------------------------------------
         
         private const string RuntimeSettingsPath = "Assets/Resources/UIRuntimeSettings.asset";
+        private const string InitialProjectPackagePath =
+            "Packages/com.sibyl.uiframework/Editor/AssetRes/Packages/InitialProject.unitypackage";
         
         [MenuItem("Project/UI/Create RuntimeSettings", false, ProjectInitPriority)]
         public static void CreateRuntimeSettings()
@@ -44,16 +44,8 @@ namespace UIFramework.Editor
             EditorGUIUtility.PingObject(so);
             Debug.Log($"[UI] {RuntimeSettingsPath} 创建成功");
         }
-
-
-        // ------------------------------------------------------------------------
-        // Package 导入相关
-        // ------------------------------------------------------------------------
-
-        private const string InitialProjectPackagePath =
-            "Packages/com.sibyl.uiframework/Editor/AssetRes/Packages/InitialProject.unitypackage";
         
-        [MenuItem("Project/UI/Import Packages/Initial Project", false, ImportPackagePriority)]
+        [MenuItem("Project/UI/初始化包导入", false, ProjectInitPriority)]
         public static void ImportInitialProjectPackage()
         {
             AssetDatabase.ImportPackage(InitialProjectPackagePath, true);

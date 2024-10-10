@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TemplateUIPrefab: {fileID: 846360921254828453, guid: 5e5e193461ceb4f90b0bdb44de5c8785,
     type: 3}
-  UIPrefabLoadFolders:
-  - {fileID: 102900000, guid: 05e6791a54d134799b203acdf7061c7d, type: 3}
+  UIPrefabLoadFolders: []
   DefaultLayerName: Dialog
   UIInfoFilePath: Assets/Scripts/UI/Core/UIManager_Info.cs
   UIInfoTemplate: {fileID: 4900000, guid: 5fab1016f8ec4514a85ec939c50ef1cf, type: 3}
-  RootGenFolder: Assets/Scripts/UI/Panels
-  RootNamespace: UI.Panels
+  PageGenFolder: Assets/Scripts/UI/Pages
+  PageNamespace: UI.Pages
   PageTemplate: {fileID: 4900000, guid: ce6f0a9d47dd48c7870ea348b57990ee, type: 3}

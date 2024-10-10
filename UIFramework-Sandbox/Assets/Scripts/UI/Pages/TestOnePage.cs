@@ -1,7 +1,7 @@
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.Utility;
 
-namespace UI.Panels
+namespace UI.Pages
 {
     [UICodeGen("Dialog")]
     public class TestOnePage : BasePage

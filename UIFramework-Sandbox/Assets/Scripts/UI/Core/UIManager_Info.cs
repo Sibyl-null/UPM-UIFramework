@@ -3,7 +3,7 @@
 // </auto-generated>
 
 using System;
-using UI.Panels;
+using UI.Pages;
 using UIFramework.Runtime.InfoContainer;
 
 namespace UI.Core

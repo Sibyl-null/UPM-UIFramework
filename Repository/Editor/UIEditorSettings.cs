@@ -26,8 +26,8 @@ namespace UIFramework.Editor
         public TextAsset UIInfoTemplate;
         
         [Header("Page 生成配置")]
-        public string RootGenFolder;
-        public string RootNamespace;
+        public string PageGenFolder;
+        public string PageNamespace;
         public TextAsset PageTemplate;
         
         private IEnumerable<string> GetLayerNames()
@@ -40,12 +40,19 @@ namespace UIFramework.Editor
         // ------------------------------------------------------------------------
         // methods
         // ------------------------------------------------------------------------
-
-        private const string DefaultSavePath = "Assets/Editor/UI/UIEditorSettings.asset";
-        private const string TemplateUIPrefabPath = "Packages/com.beatles.unity.ui/Editor/AssetRes/ZTemplateUI.prefab";
-        private const string UIInfoTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/UIInfoTemplate.txt";
-        private const string PageTemplatePath = "Packages/com.beatles.unity.ui/Editor/AssetRes/Templates/PageTemplate.txt";
         
+        private const string DefaultSavePath = "Assets/Editor/UI/UIEditorSettings.asset";
+        private const string TemplateUIPrefabPath = "Packages/com.sibyl.uiframework/Editor/AssetRes/ZTemplateUI.prefab";
+        private const string UIInfoTemplatePath = "Packages/com.sibyl.uiframework/Editor/AssetRes/Templates/UIInfoTemplate.txt";
+        private const string PageTemplatePath = "Packages/com.sibyl.uiframework/Editor/AssetRes/Templates/PageTemplate.txt";
+
+        private void Reset()
+        {
+            SetDefaultData(this);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
         [MenuItem("Project/UI/Create EditorSettings", false, UIMenuItems.ProjectInitPriority)]
         public static void CreateAsset()
         {
@@ -72,8 +79,9 @@ namespace UIFramework.Editor
         private static void SetDefaultData(UIEditorSettings settings)
         {
             settings.UIInfoFilePath = "Assets/Scripts/UI/Core/UIManager_Info.cs";
-            settings.RootGenFolder = "Assets/Scripts/UI";
-            settings.RootNamespace = "UI";
+            settings.DefaultLayerName = "Dialog";
+            settings.PageGenFolder = "Assets/Scripts/UI/Pages";
+            settings.PageNamespace = "UI.Pages";
             settings.TemplateUIPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TemplateUIPrefabPath);
             settings.PageTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(PageTemplatePath);
             settings.UIInfoTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(UIInfoTemplatePath);

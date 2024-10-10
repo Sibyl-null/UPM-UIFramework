@@ -46,7 +46,7 @@ namespace UIFramework.Editor
             PageGenerator.Generate(go, LayerName);
             UIInfoGenerator.GenerateByInitWindow(
                 new UIInfoGenerator.InfoItem(go.name, LayerName, AssetDatabase.GetAssetPath(go)),
-                $"{settings.RootNamespace}");
+                $"{settings.PageNamespace}");
             
             Close();
             AssetDatabase.SaveAssets();

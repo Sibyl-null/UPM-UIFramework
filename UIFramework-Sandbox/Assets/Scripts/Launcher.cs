@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using UI.Core;
-using UI.Panels;
+using UI.Pages;
 using UnityEngine;
 
 public class Launcher : MonoBehaviour

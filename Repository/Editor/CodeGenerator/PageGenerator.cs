@@ -24,7 +24,7 @@ namespace UIFramework.Editor.CodeGenerator
             
             GenData data = new GenData
             {
-                SelfNamespace = $"{settings.RootNamespace}",
+                SelfNamespace = $"{settings.PageNamespace}",
                 PageClassName = go.name,
                 LayerName = layerName,
                 DepNamespaceSet = new HashSet<string>()
@@ -36,7 +36,7 @@ namespace UIFramework.Editor.CodeGenerator
 
             string code = UIEditorUtility.ScribanGenerateText(settings.PageTemplate.text, data);
 
-            string savePath = $"{settings.RootGenFolder}/{data.PageClassName}.cs";
+            string savePath = $"{settings.PageGenFolder}/{data.PageClassName}.cs";
             UIEditorUtility.OverlayWriteTextFile(savePath, code);
             
             string prefabPath = AssetDatabase.GetAssetPath(go);
