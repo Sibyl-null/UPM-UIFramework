@@ -4,7 +4,6 @@ using Scriban;
 using Scriban.Runtime;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace UIFramework.Editor
 {
@@ -46,30 +45,6 @@ namespace UIFramework.Editor
                 Directory.CreateDirectory(dirPath);
             
             File.WriteAllText(filePath, text);
-        }
-        
-        /** 加载 UXml 资源, 类名与 UXml 文件名必须一致 */
-        internal static VisualTreeAsset LoadUXml<T>() where T : class
-        {
-            Type windowType = typeof(T);
-            
-            string[] guids = AssetDatabase.FindAssets(windowType.Name);
-            if (guids.Length == 0)
-                throw new Exception($"Not found any assets : {windowType.Name}");
-
-            foreach (string assetGuid in guids)
-            {
-                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
-                Type assetType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
-                
-                if (assetType == typeof(VisualTreeAsset))
-                {
-                    VisualTreeAsset treeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(assetPath);
-                    return treeAsset;
-                }
-            }
-            
-            throw new Exception($"Not found UXml file : {windowType.Name}");
         }
 
         /** 通过类名，加载 MonoScript 资源 */
@@ -116,11 +91,6 @@ namespace UIFramework.Editor
             }
             
             throw new Exception($"Not found So file : {soType.Name}");
-        }
-        
-        internal static string TrimUIEnd(this string str)
-        {
-            return str.TrimEnd("UI".ToCharArray());
         }
     }
 }

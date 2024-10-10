@@ -1,12 +1,11 @@
-using UI.Core;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.Utility;
 
-namespace UI.TestTwo
+namespace UI.Panels
 {
     [UICodeGen("Dialog")]
-    public class TestTwoPage : GamePage
-    {   
+    public class TestOnePage : BasePage
+    {
         protected override void OnInit()
         {
             base.OnInit();

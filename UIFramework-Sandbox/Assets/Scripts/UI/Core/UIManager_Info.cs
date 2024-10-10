@@ -3,9 +3,8 @@
 // </auto-generated>
 
 using System;
+using UI.Panels;
 using UIFramework.Runtime.InfoContainer;
-using UI.TestOne;
-using UI.TestTwo;
 
 namespace UI.Core
 {
@@ -18,8 +17,8 @@ namespace UI.Core
         
         private void LoadInfos()
         {
-            AddInfo(typeof(TestOnePage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestOneUI.prefab");
-            AddInfo(typeof(TestTwoPage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestTwoUI.prefab");
+            AddInfo(typeof(TestOnePage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestOnePage.prefab");
+            AddInfo(typeof(TestTwoPage), Settings.GetLayerOrder("Dialog"), "Assets/Resources/TestTwoPage.prefab");
         }
     }
 }

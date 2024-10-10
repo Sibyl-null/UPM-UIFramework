@@ -22,13 +22,28 @@ namespace UIFramework.Editor.CodeGenerator
         
         private class GenData
         {
-            public HashSet<string> NamespaceSet = new HashSet<string>();
+            public List<string> Namespaces = new List<string>();
             public List<InfoItem> InfoItems = new List<InfoItem>();
         }
         
-        internal static void Generate()
+        internal static void GenerateDirectly()
         {
             GenData data = GetGenData();
+            ProcessGenData(data);
+            
+            UIEditorSettings settings = UIEditorSettings.MustLoad();
+            string code = UIEditorUtility.ScribanGenerateText(settings.UIInfoTemplate.text, data);
+            UIEditorUtility.OverlayWriteTextFile(settings.UIInfoFilePath, code);
+            
+            Debug.Log("[UI] UIInfo 代码生成成功! " + settings.UIInfoFilePath);
+        }
+
+        internal static void GenerateByInitWindow(InfoItem infoItem, string pageNamespace)
+        {
+            GenData data = GetGenData();
+            data.Namespaces.Add(pageNamespace);
+            data.InfoItems.Add(infoItem);
+            ProcessGenData(data);
             
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             string code = UIEditorUtility.ScribanGenerateText(settings.UIInfoTemplate.text, data);
@@ -43,7 +58,7 @@ namespace UIFramework.Editor.CodeGenerator
             string[] folders = settings.UIPrefabLoadFolders.Select(AssetDatabase.GetAssetPath).ToArray();
 
             GenData data = new GenData();
-            data.NamespaceSet.Add(typeof(UIInfoContainer).Namespace);
+            data.Namespaces.Add(typeof(UIInfoContainer).Namespace);
 
             string[] guids = AssetDatabase.FindAssets("t:prefab", folders);
             foreach (string guid in guids)
@@ -59,7 +74,7 @@ namespace UIFramework.Editor.CodeGenerator
                 if (attribute == null)
                     throw new Exception($"{page.GetType().Name} 脚本缺少 UICodeGenAttribute 特性");
 
-                data.NamespaceSet.Add(page.GetType().Namespace);
+                data.Namespaces.Add(page.GetType().Namespace);
                 data.InfoItems.Add(new InfoItem
                 {
                     PageType = page.GetType().Name,
@@ -67,10 +82,17 @@ namespace UIFramework.Editor.CodeGenerator
                     LoadPath = assetPath
                 });
             }
+            
+            return data;
+        }
 
+        private static void ProcessGenData(GenData data)
+        {
+            data.Namespaces = data.Namespaces.ToHashSet().ToList();
+            data.Namespaces.Sort();
+            
             data.InfoItems.Sort((a, b) =>
                 String.Compare(a.PageType, b.PageType, StringComparison.Ordinal));
-            return data;
         }
     }
 }

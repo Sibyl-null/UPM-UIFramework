@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UIFramework.Editor.CodeGenerator;
 using UIFramework.Runtime;
 using UnityEditor;
@@ -23,7 +21,6 @@ namespace UIFramework.Editor
         // 工程初始化相关
         // ------------------------------------------------------------------------
         
-        public const string AutoTag = "AutoField";
         private const string RuntimeSettingsPath = "Assets/Resources/UIRuntimeSettings.asset";
         
         [MenuItem("Project/UI/Create RuntimeSettings", false, ProjectInitPriority)]
@@ -47,47 +44,8 @@ namespace UIFramework.Editor
             EditorGUIUtility.PingObject(so);
             Debug.Log($"[UI] {RuntimeSettingsPath} 创建成功");
         }
-        
-            
-        [MenuItem("Project/UI/SetTags", false, ProjectInitPriority)]
-        public static void SetTags()
-        {
-            var asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0];
-            SerializedObject tagManager = new SerializedObject(asset);
 
-            SerializedProperty tagsProp = tagManager.FindProperty("tags");
-            AddFlags(tagsProp, new List<string> { AutoTag });
 
-            tagManager.ApplyModifiedProperties();
-            Debug.Log("[UI] SetTags success");
-        }
-
-        private static void AddFlags(SerializedProperty flagProp, List<string> flags)
-        {
-            var hashSet = new HashSet<string>();
-            for (int i = 0; i < flagProp.arraySize; i++)
-            {
-                SerializedProperty sp = flagProp.GetArrayElementAtIndex(i);
-                hashSet.Add(sp.stringValue);
-            }
-
-            flagProp.ClearArray();
-
-            foreach (var flag in flags)
-            {
-                hashSet.Add(flag);
-            }
-
-            var list = hashSet.ToList();
-            for (int i = 0; i < list.Count; i++)
-            {
-                flagProp.InsertArrayElementAtIndex(i);
-                SerializedProperty sp = flagProp.GetArrayElementAtIndex(i);
-                sp.stringValue = list[i];
-            }
-        }
-        
-        
         // ------------------------------------------------------------------------
         // Package 导入相关
         // ------------------------------------------------------------------------
@@ -109,7 +67,7 @@ namespace UIFramework.Editor
         [MenuItem("Project/UI/Generate UIInfo", false, GenerateCodePriority)]
         public static void GenerateUIInfo()
         {
-            UIInfoGenerator.Generate();
+            UIInfoGenerator.GenerateDirectly();
             AssetDatabase.Refresh();
         }
         
@@ -152,29 +110,6 @@ namespace UIFramework.Editor
                 selectedPath = AssetDatabase.GUIDToAssetPath(Selection.assetGUIDs[0]);
             
             return selectedPath;
-        }
-        
-        [MenuItem("Assets/InitUIScript #a", false, AssetsPriority)]
-        public static void InitUIScript()
-        {
-            GameObject go = Selection.activeGameObject;
-            if (go == null)
-            {
-                Debug.LogError("[UI] InitUIScript 未选中任何 Prefab");
-                return;
-            }
-            
-            MonoScript script = UIEditorUtility.LoadMonoScriptAsset(go.name.TrimUIEnd() + "Page");
-            if (script != null)
-            {
-                EditorUtility.DisplayDialog("失败", $"{script.name} 脚本已存在", "确定");
-                return;
-            }
-            
-            PageGenerator.Generate(go);
-            AssetDatabase.Refresh();
-            
-            EditorUtility.DisplayDialog("初始脚本成功", "请指定 Layer 后，手动生成 UIInfo", "确定");
         }
         
         

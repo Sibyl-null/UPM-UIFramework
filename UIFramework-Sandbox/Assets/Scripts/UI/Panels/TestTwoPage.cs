@@ -1,12 +1,11 @@
-using UI.Core;
-{{~ for $namespace in dep_namespace_set ~}}
-using {{ $namespace }};
-{{~ end ~}}
+using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 
-namespace {{ self_namespace }}
+namespace UI.Panels
 {
-    public class {{ page_class_name }} : GamePage<{{ ui_class_name }}>
-    {   
+    [UICodeGen("Dialog")]
+    public class TestTwoPage : BasePage
+    {
         protected override void OnInit()
         {
             base.OnInit();

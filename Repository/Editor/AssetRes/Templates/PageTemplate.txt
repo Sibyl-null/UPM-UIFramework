@@ -5,7 +5,7 @@ using {{ $namespace }};
 namespace {{ self_namespace }}
 {
     [UICodeGen("{{ layer_name }}")]
-    public class {{ page_class_name }} : GamePage
+    public class {{ page_class_name }} : BasePage
     {
         protected override void OnInit()
         {

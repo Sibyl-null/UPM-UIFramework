@@ -16,30 +16,9 @@ MonoBehaviour:
     type: 3}
   UIPrefabLoadFolders:
   - {fileID: 102900000, guid: 05e6791a54d134799b203acdf7061c7d, type: 3}
+  DefaultLayerName: Dialog
   UIInfoFilePath: Assets/Scripts/UI/Core/UIManager_Info.cs
   UIInfoTemplate: {fileID: 4900000, guid: 5fab1016f8ec4514a85ec939c50ef1cf, type: 3}
-  RootGenFolder: Assets/Scripts/UI
-  RootNamespace: UI
-  PageTemplate: {fileID: 4900000, guid: 0458d0ed185354accb7f03809602ec2b, type: 3}
-  BaseUITemplate: {fileID: 4900000, guid: f0f2429f4aeb45c58ab33f8183a03221, type: 3}
-  GenSupports:
-  - TypeName: GameObject
-    GenSuffix: Go
-  - TypeName: RectTransform
-    GenSuffix: Trans
-  - TypeName: Image
-    GenSuffix: Img
-  - TypeName: Button
-    GenSuffix: Btn
-  - TypeName: Text
-    GenSuffix: Text
-  - TypeName: LangText
-    GenSuffix: Text
-  - TypeName: Canvas
-    GenSuffix: Canvas
-  - TypeName: UIToggle
-    GenSuffix: Toggle
-  - TypeName: ResizeText
-    GenSuffix: Text
-  - TypeName: TextMeshProUGUI
-    GenSuffix: Tmp
+  RootGenFolder: Assets/Scripts/UI/Panels
+  RootNamespace: UI.Panels
+  PageTemplate: {fileID: 4900000, guid: ce6f0a9d47dd48c7870ea348b57990ee, type: 3}

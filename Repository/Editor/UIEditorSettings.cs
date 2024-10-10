@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Sirenix.OdinInspector;
+using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,8 +13,13 @@ namespace UIFramework.Editor
     {
         [Header("公共配置")]
         public GameObject TemplateUIPrefab;
+        
         [Tooltip("UI Prefab 需要处于这些目录下")]
         public List<DefaultAsset> UIPrefabLoadFolders;
+
+        [Tooltip("使用 UI 初始化窗口时默认选择的 LayerName")]
+        [ValueDropdown(nameof(GetLayerNames))]
+        public string DefaultLayerName;
         
         [Header("UIInfo 生成配置")]
         public string UIInfoFilePath;
@@ -21,6 +29,12 @@ namespace UIFramework.Editor
         public string RootGenFolder;
         public string RootNamespace;
         public TextAsset PageTemplate;
+        
+        private IEnumerable<string> GetLayerNames()
+        {
+            UIRuntimeSettings settings = UIEditorUtility.LoadScriptableAsset<UIRuntimeSettings>();
+            return settings.LayerInfos.Select(x => x.Name);
+        }
         
         
         // ------------------------------------------------------------------------

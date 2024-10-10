@@ -3,7 +3,7 @@
 // </auto-generated>
 
 using System;
-{{~ for $namespace in namespace_set ~}}
+{{~ for $namespace in namespaces ~}}
 using {{ $namespace }};
 {{~ end ~}}
 

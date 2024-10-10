@@ -12,7 +12,8 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "Scriban.dll",
-        "Sirenix.Serialization.dll"
+        "Sirenix.OdinInspector.Editor.dll",
+        "Sirenix.OdinInspector.Attributes.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
