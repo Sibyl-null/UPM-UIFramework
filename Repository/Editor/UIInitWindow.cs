@@ -44,12 +44,9 @@ namespace UIFramework.Editor
             GameObject go = Selection.activeGameObject;
             
             PageGenerator.Generate(go, LayerName);
-            UIInfoGenerator.GenerateByInitWindow(new UIInfoGenerator.InfoItem
-                {
-                    PageType = go.name,
-                    Layer = LayerName,
-                    LoadPath = AssetDatabase.GetAssetPath(go),
-                }, $"{settings.RootNamespace}");
+            UIInfoGenerator.GenerateByInitWindow(
+                new UIInfoGenerator.InfoItem(go.name, LayerName, AssetDatabase.GetAssetPath(go)),
+                $"{settings.RootNamespace}");
             
             Close();
             AssetDatabase.SaveAssets();
