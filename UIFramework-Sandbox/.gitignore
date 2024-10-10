@@ -71,3 +71,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .idea
+
+Assets/Addons/Sirenix/*
+Assets/Addons/Sirenix.meta
+
+Assets/Addons/QHierarchy/*
+Assets/Addons/QHierarchy.meta
