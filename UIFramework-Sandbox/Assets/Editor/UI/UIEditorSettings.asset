@@ -20,4 +20,4 @@ MonoBehaviour:
   UIInfoTemplate: {fileID: 4900000, guid: 5fab1016f8ec4514a85ec939c50ef1cf, type: 3}
   PageGenFolder: Assets/Scripts/UI/Pages
   PageNamespace: UI.Pages
-  PageTemplate: {fileID: 4900000, guid: ce6f0a9d47dd48c7870ea348b57990ee, type: 3}
+  PageTemplate: {fileID: 4900000, guid: 7c9d6b3c5121c4795b3acdf97934b0d7, type: 3}
