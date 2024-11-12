@@ -52,10 +52,6 @@ namespace UIFramework.Runtime.Page
         {
         }
 
-        protected virtual void InAnimComplete()
-        {
-        }
-
         public virtual void OnTick()
         {
         }
@@ -164,11 +160,6 @@ namespace UIFramework.Runtime.Page
         void IPage.RemoveEvent()
         {
             RemoveEvent();
-        }
-
-        void IPage.InAnimComplete()
-        {
-            InAnimComplete();
         }
     }
 }

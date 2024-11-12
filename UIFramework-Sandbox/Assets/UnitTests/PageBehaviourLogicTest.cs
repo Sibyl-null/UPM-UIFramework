@@ -42,7 +42,6 @@ namespace UnitTests
                 page.PlayInAnimation(handle);
                 page.SetInputActive(true);
                 page.AddEvent();
-                page.InAnimComplete();
             });
             
             Assert.AreEqual(true, pageLogic.IsOpening);

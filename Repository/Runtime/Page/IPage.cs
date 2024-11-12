@@ -34,7 +34,6 @@ namespace UIFramework.Runtime.Page
         void OnRelease();
         void AddEvent();
         void RemoveEvent();
-        void InAnimComplete();
         void OnEscape();
     }
 }

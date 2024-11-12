@@ -39,7 +39,6 @@ namespace UIFramework.Runtime.Page
                 IsPlayingAnim = false;
                 _page.SetInputActive(true);
                 _page.AddEvent();
-                _page.InAnimComplete();
             });
 
             _page.PlayInAnimation(_openHandle);
