@@ -28,23 +28,9 @@ namespace UIFramework.Editor.CodeGenerator
             public List<InfoItem> InfoItems = new List<InfoItem>();
         }
         
-        internal static void GenerateDirectly()
+        internal static void Generate()
         {
             GenData data = GetGenData();
-            ProcessGenData(data);
-            
-            UIEditorSettings settings = UIEditorSettings.MustLoad();
-            string code = UIEditorUtility.ScribanGenerateText(settings.UIInfoTemplate.text, data);
-            UIEditorUtility.OverlayWriteTextFile(settings.UIInfoFilePath, code);
-            
-            Debug.Log("[UI] UIInfo 代码生成成功! " + settings.UIInfoFilePath);
-        }
-
-        internal static void GenerateByInitWindow(InfoItem infoItem, string pageNamespace)
-        {
-            GenData data = GetGenData();
-            data.Namespaces.Add(pageNamespace);
-            data.InfoItems.Add(infoItem);
             ProcessGenData(data);
             
             UIEditorSettings settings = UIEditorSettings.MustLoad();

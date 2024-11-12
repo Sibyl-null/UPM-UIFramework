@@ -59,7 +59,7 @@ namespace UIFramework.Editor
         [MenuItem("Project/UI/Generate UIInfo", false, GenerateCodePriority)]
         public static void GenerateUIInfo()
         {
-            UIInfoGenerator.GenerateDirectly();
+            UIInfoGenerator.Generate();
             AssetDatabase.Refresh();
         }
         
@@ -68,7 +68,7 @@ namespace UIFramework.Editor
         // Assets MenuItems
         // ------------------------------------------------------------------------
         
-        [MenuItem("Assets/Create Template UI", false, AssetsPriority)]
+        [MenuItem("Assets/创建 UI 模版 Prefab", false, AssetsPriority)]
         public static void CreateTemplateUI()
         {
             string path = GetSelectedPath();

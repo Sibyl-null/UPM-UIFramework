@@ -18,11 +18,6 @@ namespace UIFramework.Editor
         public string UIInfoFilePath;
         public TextAsset UIInfoTemplate;
         
-        [Header("Page 生成配置")]
-        public string PageGenFolder;
-        public string PageNamespace;
-        public TextAsset PageTemplate;
-        
         
         // ------------------------------------------------------------------------
         // methods
@@ -30,8 +25,7 @@ namespace UIFramework.Editor
         
         private const string DefaultSavePath = "Assets/Editor/UI/UIEditorSettings.asset";
         private const string TemplateUIPrefabPath = "Packages/com.sibyl.uiframework/Editor/AssetRes/ZTemplateUI.prefab";
-        private const string UIInfoTemplatePath = "Packages/com.sibyl.uiframework/Editor/AssetRes/Templates/UIInfoTemplate.txt";
-        private const string PageTemplatePath = "Packages/com.sibyl.uiframework/Editor/AssetRes/Templates/PageTemplate.txt";
+        private const string UIInfoTemplatePath = "Packages/com.sibyl.uiframework/Editor/AssetRes/UIInfoTemplate.txt";
 
         private void Reset()
         {
@@ -66,10 +60,7 @@ namespace UIFramework.Editor
         private static void SetDefaultData(UIEditorSettings settings)
         {
             settings.UIInfoFilePath = "Assets/Scripts/UI/Core/UIManager_Info.cs";
-            settings.PageGenFolder = "Assets/Scripts/UI/Pages";
-            settings.PageNamespace = "UI.Pages";
             settings.TemplateUIPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TemplateUIPrefabPath);
-            settings.PageTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(PageTemplatePath);
             settings.UIInfoTemplate = AssetDatabase.LoadAssetAtPath<TextAsset>(UIInfoTemplatePath);
         }
         

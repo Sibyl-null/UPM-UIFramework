@@ -11,9 +11,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Scriban.dll",
-        "Sirenix.OdinInspector.Editor.dll",
-        "Sirenix.OdinInspector.Attributes.dll"
+        "Scriban.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
