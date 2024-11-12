@@ -115,7 +115,6 @@ namespace UIFramework.Runtime
             ClosePage(typeof(T), closeAnim);
         }
         
-        /** 禁止在 UI 的 OnTick 中移除 Page */
         public void DestroyPage(Type pageType, bool closeAnim = true)
         {
             if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
@@ -126,7 +125,6 @@ namespace UIFramework.Runtime
                 handle.AddCompletedCallback(() => ResLoader.UnLoad(info.LoadPath));
         }
         
-        /** 禁止在 UI 的 OnTick 中移除 Page */
         public void DestroyPage<T>(bool closeAnim = true) where T : class, IPage
         {
             DestroyPage(typeof(T), closeAnim);

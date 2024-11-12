@@ -12,7 +12,7 @@ namespace UIFramework.Runtime.EscapeReceiver
         private const int EventOrder = 0;
         
         private readonly IPageController _pageController;
-        private readonly StackList<UIInfo> _infoStack = new StackList<UIInfo>();
+        private readonly StackList<UIInfo> _infoStack = new();
 
         internal List<UIInfo> Infos => _infoStack.GetList();
 
@@ -48,28 +48,23 @@ namespace UIFramework.Runtime.EscapeReceiver
                 return;
             }
 
-            for (int i = infos.Count - 1; i >= 0; i--)
+            UIInfo info = infos[^1];
+            IPage page = _pageController.GetPage(info);
+            
+            if (page == null)
             {
-                IPage page = _pageController.GetPage(infos[i]);
-                
-                if (page == null)
-                {
-                    UILogger.Error($"[UI] 页面不存在: {infos[i].PageType.Name}" );
-                    return;
-                }
-                
-                if (page.InputActive == false)
-                {
-                    UILogger.Info($"[UI] {infos[i].PageType.Name} 页面禁用输入中，不处理返回键");
-                    return;
-                }
-                
-                if (page.CanConsumeEscape())
-                {
-                    page.OnEscape();
-                    return;
-                }
+                UILogger.Error($"[UI] 页面不存在: {info.PageType.Name}" );
+                return;
             }
+                
+            if (page.InputActive == false)
+            {
+                UILogger.Info($"[UI] {info.PageType.Name} 页面禁用输入中，不处理返回键");
+                return;
+            }
+                
+            if (page.CanConsumeEscape)
+                page.OnEscape();
         }
     }
 }

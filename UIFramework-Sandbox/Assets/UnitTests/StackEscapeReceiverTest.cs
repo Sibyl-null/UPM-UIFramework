@@ -12,10 +12,7 @@ namespace UnitTests
     public class StackEscapeReceiverTest
     {
         [Test]
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        public void _07_ProcessEscape_With_Consume(int index)
+        public void _07_ProcessEscape_With_Consume()
         {
             // arrange
             IPageController controller = Substitute.For<IPageController>();
@@ -29,7 +26,7 @@ namespace UnitTests
                 UIInfo info = new UIInfo(page.GetType(), default);
 
                 page.InputActive.Returns(true);
-                page.CanConsumeEscape().Returns(i <= index);
+                page.CanConsumeEscape.Returns(true);
                 controller.GetPage(info).Returns(page);
 
                 strategy.Infos.Add(info);
@@ -43,7 +40,7 @@ namespace UnitTests
             for (int i = 0; i < 3; ++i)
             {
                 IPage page = pageList[i];
-                if (i == index)
+                if (i == 2)
                     page.Received(1).OnEscape();
                 else
                     page.DidNotReceive().OnEscape();
@@ -51,10 +48,7 @@ namespace UnitTests
         }
         
         [Test]
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        public void _08_ProcessEscape_With_InputActive(int index)
+        public void _08_ProcessEscape_With_InputActive()
         {
             // arrange
             IPageController controller = Substitute.For<IPageController>();
@@ -67,8 +61,8 @@ namespace UnitTests
                 IPage page = Substitute.For<IPage>();
                 UIInfo info = new UIInfo(page.GetType(), default);
 
-                page.InputActive.Returns(i != index);
-                page.CanConsumeEscape().Returns(false);
+                page.InputActive.Returns(false);
+                page.CanConsumeEscape.Returns(true);
                 controller.GetPage(info).Returns(page);
 
                 strategy.Infos.Add(info);
@@ -82,10 +76,7 @@ namespace UnitTests
             for (int i = 0; i < 3; ++i)
             {
                 IPage page = pageList[i];
-                if (i <= index)
-                    page.DidNotReceive().CanConsumeEscape();
-                else
-                    page.Received(1).CanConsumeEscape();
+                page.DidNotReceive().OnEscape();
             }
         }
     }

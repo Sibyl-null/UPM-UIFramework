@@ -14,6 +14,7 @@ namespace UIFramework.Runtime.Page
         bool IsPlayingAnim { get; }
         bool InputActive { get; }
         int Layer { get; }
+        bool CanConsumeEscape { get; }
 
         void Create(UIInfo info, string sortingLayerName, GameObject go);
         UIAsyncHandle Open(IPageArg arg = null);
@@ -34,8 +35,6 @@ namespace UIFramework.Runtime.Page
         void AddEvent();
         void RemoveEvent();
         void InAnimComplete();
-
         void OnEscape();
-        bool CanConsumeEscape();
     }
 }

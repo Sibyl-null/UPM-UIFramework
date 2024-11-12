@@ -10,7 +10,7 @@ namespace UIFramework.Runtime.Page
     public abstract class BasePage : MonoBehaviour, IPage
     {
         private PageBehaviourLogic _behaviourLogic;
-        
+
         public bool IsOpening => _behaviourLogic.IsOpening;
         public bool IsPlayingAnim => _behaviourLogic.IsPlayingAnim;
         public bool InputActive => EventSystem.current.enabled && !UIRaycast.raycastTarget;
@@ -20,9 +20,10 @@ namespace UIFramework.Runtime.Page
         protected GraphicRaycaster GraphicRaycaster { get; private set; }
         protected UIRaycast UIRaycast { get; private set; }
         
+        public virtual bool CanConsumeEscape => true;
         public abstract int Layer { get; }
-        
-        
+
+
         // ------------------------------------------------------------------------
         // 生命周期
         // ------------------------------------------------------------------------
@@ -61,11 +62,6 @@ namespace UIFramework.Runtime.Page
 
         public virtual void OnEscape()
         {
-        }
-
-        public virtual bool CanConsumeEscape()
-        {
-            return true;
         }
         
         protected virtual void PlayInAnimation(UIAsyncHandle handle)
