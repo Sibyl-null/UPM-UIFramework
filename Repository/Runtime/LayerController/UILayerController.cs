@@ -53,7 +53,7 @@ namespace UIFramework.Runtime.LayerController
 
             if (item.Pages.Contains(target))
             {
-                _logger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中已存在"); 
+                _logger.Warning($"[UI] {target.GetType().Name} 在 {_logger.UILayerToString(layer)} 层级中已存在"); 
                 return;
             }
             
@@ -74,7 +74,7 @@ namespace UIFramework.Runtime.LayerController
 
             if (!item.Pages.Contains(target))
             {
-                _logger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中不存在"); 
+                _logger.Warning($"[UI] {target.GetType().Name} 在 {_logger.UILayerToString(layer)} 层级中不存在"); 
                 return;
             }
             
@@ -107,7 +107,7 @@ namespace UIFramework.Runtime.LayerController
             GameObject go = new GameObject();
             go.layer = _arg.GoLayerValue;
 #if UNITY_EDITOR
-            go.gameObject.name = UIUtility.LogUILayer(layer);
+            go.gameObject.name = _logger.UILayerToString(layer);
 #endif
             
             RectTransform rectTrans = go.AddComponent<RectTransform>();

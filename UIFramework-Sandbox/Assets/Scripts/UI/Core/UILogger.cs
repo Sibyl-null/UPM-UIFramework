@@ -19,5 +19,10 @@ namespace UI.Core
         {
             Debug.LogError(message);
         }
+
+        public string UILayerToString(int layer)
+        {
+            return ((UILayer)layer).ToString();
+        }
     }
 }
