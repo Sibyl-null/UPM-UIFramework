@@ -7,14 +7,6 @@ public class Launcher : MonoBehaviour
 {
     public Canvas root;
     
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            UIManager.Instance?.ReceiveEscape();
-        
-        UIManager.Instance?.Tick();
-    }
-    
     [Button]
     private void CreateUIManager()
     {

@@ -34,7 +34,6 @@ namespace UIFramework.Runtime.Page
         void AddEvent();
         void RemoveEvent();
         void InAnimComplete();
-        void OnTick();
 
         void OnEscape();
         bool CanConsumeEscape();

@@ -131,15 +131,6 @@ namespace UIFramework.Runtime
         {
             DestroyPage(typeof(T), closeAnim);
         }
-        
-        public virtual void Tick()
-        {
-            foreach (IPage page in PageController.GetAllPages())
-            {
-                if (page.IsOpening && !page.IsPlayingAnim)
-                    page.OnTick();
-            }
-        }
 
         public virtual void ReceiveEscape()
         {

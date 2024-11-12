@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoLayerName: UI
   SortingLayerName: UI
-  PageOrderRange: 50
+  PageOrderRange: 20
