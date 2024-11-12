@@ -25,14 +25,14 @@ namespace UIFramework.Runtime
         public UIInfoContainer InfoContainer { get; protected set; }
 
         public IEventBus EventBus { get; protected set; }
-        
+        protected IUILogger Logger { get; set; }
         protected IUIResLoader ResLoader { get; set; }
         protected ILayerController LayerController { get; set; }
         protected IPageFactory PageFactory { get; set; }
         protected IPageController PageController { get; set; }
         protected IEscapeReceiver EscapeReceiver { get; set; }
 
-        protected virtual void InitInternal(Canvas canvas, IUIResLoader resLoader)
+        protected virtual void InitInternal(Canvas canvas, IUIResLoader resLoader, IUILogger logger)
         {
             UICanvas = canvas;
             UIScaler = canvas.GetComponent<CanvasScaler>();
@@ -40,13 +40,14 @@ namespace UIFramework.Runtime
             EventSystem = EventSystem.current;
 
             ResLoader = resLoader;
+            Logger = logger;
             Settings = resLoader.LoadSettings();
             EventBus = new UIEventBus();
-            InfoContainer = new UIInfoContainer();
-            LayerController = new UILayerController(new LayerControllerArg(Root, Settings));
-            PageFactory = new MonoPageFactory(ResLoader, LayerController);
-            PageController = new UIPageController(PageFactory, LayerController, EventBus, Settings.SortingLayerName);
-            EscapeReceiver = new StackEscapeReceiver(PageController, EventBus);
+            InfoContainer = new UIInfoContainer(Logger);
+            LayerController = new UILayerController(Logger, new LayerControllerArg(Root, Settings));
+            PageFactory = new MonoPageFactory(ResLoader, Logger, LayerController);
+            PageController = new UIPageController(Logger, PageFactory, LayerController, EventBus, Settings.SortingLayerName);
+            EscapeReceiver = new StackEscapeReceiver(Logger, PageController, EventBus);
         }
 
         protected virtual void ReleaseInternal()

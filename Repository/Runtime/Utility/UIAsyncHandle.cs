@@ -37,11 +37,6 @@ namespace UIFramework.Runtime.Utility
 
         public void Reset()
         {
-            if (_onCompleted != null)
-            {
-                UILogger.Warning("[UI] Reset called on an incomplete async handle");
-            }
-            
             _isCompleted = false;
             _onCompleted = null;
         }

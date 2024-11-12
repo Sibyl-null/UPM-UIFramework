@@ -38,7 +38,8 @@ namespace UnitTests
             
             _eventBus = Substitute.For<IEventBus>();
 
-            _pageController = new UIPageController(_pageFactory, _layerController, _eventBus, SortingLayerName);
+            _pageController = new UIPageController(Substitute.For<IUILogger>(), _pageFactory, 
+                _layerController, _eventBus, SortingLayerName);
         }
 
         private static IPage SubstitutePage()

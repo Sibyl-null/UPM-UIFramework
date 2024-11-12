@@ -6,13 +6,19 @@ namespace UIFramework.Runtime.InfoContainer
 {
     public class UIInfoContainer
     {
+        private readonly IUILogger _logger;
         private readonly Dictionary<Type, UIInfo> _infos = new(128);
-        
+
+        public UIInfoContainer(IUILogger logger)
+        {
+            _logger = logger;
+        }
+
         public void AddInfo(UIInfo info)
         {
             if (!_infos.TryAdd(info.PageType, info))
             {
-                UILogger.Error($"[UI] AddInfo: UIInfo 已添加 - {info.PageType.Name}");
+                _logger.Error($"[UI] AddInfo: UIInfo 已添加 - {info.PageType.Name}");
             }
         }
 
@@ -20,7 +26,7 @@ namespace UIFramework.Runtime.InfoContainer
         {
             if (!_infos.TryGetValue(pageType, out info))
             {
-                UILogger.Error($"[UI] UIInfo 获取失败: {pageType.Name}");
+                _logger.Error($"[UI] UIInfo 获取失败: {pageType.Name}");
                 return false;
             }
 

@@ -1,5 +1,4 @@
 using UIFramework.Runtime;
-using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UI.Core
@@ -12,12 +11,12 @@ namespace UI.Core
         {
             if (Instance != null)
             {
-                UILogger.Error("[UI] UIManager has already been created");
+                Debug.LogError("[UI] UIManager has already been created");
                 return;
             }
             
             Instance = new UIManager();
-            Instance.InitInternal(canvas, new UIResLoader());
+            Instance.InitInternal(canvas, new UIResLoader(), new UILogger());
             Instance.LoadInfos();
         }
         

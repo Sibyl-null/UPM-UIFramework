@@ -10,11 +10,13 @@ namespace UIFramework.Runtime.PageFactory
     public class MonoPageFactory : IPageFactory
     {
         private readonly IUIResLoader _resLoader;
+        private readonly IUILogger _logger;
         private readonly ILayerController _layerController;
         
-        public MonoPageFactory(IUIResLoader resLoader, ILayerController layerController)
+        public MonoPageFactory(IUIResLoader resLoader, IUILogger logger, ILayerController layerController)
         {
             _resLoader = resLoader;
+            _logger = logger;
             _layerController = layerController;
         }
         
@@ -22,21 +24,21 @@ namespace UIFramework.Runtime.PageFactory
         {
             if (typeof(IPage).IsAssignableFrom(info.PageType) == false)
             {
-                UILogger.Error($"[UI] {info.PageType.Name} 未实现 IPage 接口");
+                _logger.Error($"[UI] {info.PageType.Name} 未实现 IPage 接口");
                 return (null, null);
             }
             
             GameObject prefab = _resLoader.Load(info.LoadPath);
             if (prefab == null)
             {
-                UILogger.Error($"[UI] UIPrefab 加载失败失败: {info.LoadPath}");
+                _logger.Error($"[UI] UIPrefab 加载失败失败: {info.LoadPath}");
                 return (null, null);
             }
 
             GameObject go = Object.Instantiate(prefab);
             if (go == null)
             {
-                UILogger.Error($"[UI] UIPrefab 实例化失败: {info.LoadPath}");
+                _logger.Error($"[UI] UIPrefab 实例化失败: {info.LoadPath}");
                 return (null, null);
             }
             
@@ -47,7 +49,7 @@ namespace UIFramework.Runtime.PageFactory
             IPage page = go.GetComponent<IPage>();
             if (page == null)
             {
-                UILogger.Error($"[UI] {go.name} 未添加实现 IPage 的组件");
+                _logger.Error($"[UI] {go.name} 未添加实现 IPage 的组件");
                 return (null, null);
             }
             

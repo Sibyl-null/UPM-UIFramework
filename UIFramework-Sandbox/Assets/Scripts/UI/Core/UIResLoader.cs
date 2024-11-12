@@ -1,6 +1,5 @@
 using UIFramework.Runtime;
 using UIFramework.Runtime.ResLoader;
-using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UI.Core
@@ -15,7 +14,7 @@ namespace UI.Core
             GameObject prefab = Resources.Load<GameObject>(path);
             if (prefab == null)
             {
-                UILogger.Warning($"[UI] Load prefab failed! {path}");
+                Debug.LogWarning($"[UI] Load prefab failed! {path}");
                 return null;
             }
             

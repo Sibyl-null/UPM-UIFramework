@@ -10,14 +10,16 @@ namespace UIFramework.Runtime.EscapeReceiver
     public class StackEscapeReceiver : IEscapeReceiver
     {
         private const int EventOrder = 0;
-        
+
+        private readonly IUILogger _logger;
         private readonly IPageController _pageController;
         private readonly StackList<UIInfo> _infoStack = new();
 
         internal List<UIInfo> Infos => _infoStack.GetList();
 
-        public StackEscapeReceiver(IPageController pageController, IEventBus eventBus)
+        public StackEscapeReceiver(IUILogger logger, IPageController pageController, IEventBus eventBus)
         {
+            _logger = logger;
             _pageController = pageController;
             
             eventBus.Register(EventType.OpenBeforeAnim, OnOpenPageBeforeAnim, EventOrder);
@@ -44,7 +46,7 @@ namespace UIFramework.Runtime.EscapeReceiver
             List<UIInfo> infos = _infoStack.GetList();
             if (_infoStack.Count == 0)
             {
-                UILogger.Info("[UI] 栈中无页面, 不处理返回键");
+                _logger.Info("[UI] 栈中无页面, 不处理返回键");
                 return;
             }
 
@@ -53,13 +55,13 @@ namespace UIFramework.Runtime.EscapeReceiver
             
             if (page == null)
             {
-                UILogger.Error($"[UI] 页面不存在: {info.PageType.Name}" );
+                _logger.Error($"[UI] 页面不存在: {info.PageType.Name}" );
                 return;
             }
                 
             if (page.InputActive == false)
             {
-                UILogger.Info($"[UI] {info.PageType.Name} 页面禁用输入中，不处理返回键");
+                _logger.Info($"[UI] {info.PageType.Name} 页面禁用输入中，不处理返回键");
                 return;
             }
                 

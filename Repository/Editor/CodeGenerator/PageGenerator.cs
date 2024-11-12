@@ -84,7 +84,7 @@ namespace UIFramework.Editor.CodeGenerator
             EditorUtility.SetDirty(go);
             AssetDatabase.SaveAssetIfDirty(go);
             
-            UILogger.Info($"[UI] Page 脚本自动挂载成功: {scriptType.Name}.cs");
+            Debug.Log($"[UI] Page 脚本自动挂载成功: {scriptType.Name}.cs");
         }
 
         private static void TryAddComponent(GameObject go, Type type)

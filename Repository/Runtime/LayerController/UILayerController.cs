@@ -20,12 +20,14 @@ namespace UIFramework.Runtime.LayerController
                 Trans = trans;
             }
         }
-        
+
+        private readonly IUILogger _logger;
         private readonly LayerControllerArg _arg;
         private readonly Dictionary<int, LayerItem> _items = new Dictionary<int, LayerItem>(10);
 
-        public UILayerController(LayerControllerArg arg)
+        public UILayerController(IUILogger logger, LayerControllerArg arg)
         {
+            _logger = logger;
             _arg = arg;
             
 #if UNITY_EDITOR
@@ -51,7 +53,7 @@ namespace UIFramework.Runtime.LayerController
 
             if (item.Pages.Contains(target))
             {
-                UILogger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中已存在"); 
+                _logger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中已存在"); 
                 return;
             }
             
@@ -72,7 +74,7 @@ namespace UIFramework.Runtime.LayerController
 
             if (!item.Pages.Contains(target))
             {
-                UILogger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中不存在"); 
+                _logger.Warning($"[UI] {target.GetType().Name} 在 {UIUtility.LogUILayer(layer)} 层级中不存在"); 
                 return;
             }
             

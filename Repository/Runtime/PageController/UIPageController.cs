@@ -14,6 +14,7 @@ namespace UIFramework.Runtime.PageController
 {
     public class UIPageController : IPageController
     {
+        private readonly IUILogger _logger;
         private readonly IPageFactory _pageFactory;
         private readonly ILayerController _layerController;
         private readonly IEventBus _eventBus;
@@ -21,8 +22,10 @@ namespace UIFramework.Runtime.PageController
         
         private readonly Dictionary<Type, IPage> _pageDic = new(32);
 
-        public UIPageController(IPageFactory pageFactory, ILayerController layerController, IEventBus eventBus, string sortingLayerName)
+        public UIPageController(IUILogger logger, IPageFactory pageFactory, ILayerController layerController, 
+            IEventBus eventBus, string sortingLayerName)
         {
+            _logger = logger;
             _pageFactory = pageFactory;
             _layerController = layerController;
             _eventBus = eventBus;
@@ -57,14 +60,14 @@ namespace UIFramework.Runtime.PageController
             IPage p = GetPage(info);
             if (p != null)
             {
-                UILogger.Warning($"[UI] Page 已存在: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 已存在: {info.PageType.Name}");
                 return p;
             }
             
             (IPage page, GameObject go) = _pageFactory.CreatePage(info);
             if (page == null)
             {
-                UILogger.Error($"[UI] Page 创建失败: {info.PageType.Name}");
+                _logger.Error($"[UI] Page 创建失败: {info.PageType.Name}");
                 return null;
             }
 
@@ -87,13 +90,13 @@ namespace UIFramework.Runtime.PageController
 
             if (page.IsOpening)
             {
-                UILogger.Warning($"[UI] Page 已打开: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 已打开: {info.PageType.Name}");
                 return null;
             }
 
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 
@@ -111,19 +114,19 @@ namespace UIFramework.Runtime.PageController
             IPage page = GetPage(info);
             if (page == null)
             {
-                UILogger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
                 return null;
             }
 
             if (!page.IsOpening)
             {
-                UILogger.Warning($"[UI] Page 已关闭: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 已关闭: {info.PageType.Name}");
                 return null;
             }
             
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 
@@ -144,13 +147,13 @@ namespace UIFramework.Runtime.PageController
             IPage page = GetPage(info);
             if (page == null)
             {
-                UILogger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 不存在: {info.PageType.Name}");
                 return null;
             }
             
             if (page.IsPlayingAnim)
             {
-                UILogger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
+                _logger.Warning($"[UI] Page 正在播放动画: {info.PageType.Name}");
                 return null;
             }
 

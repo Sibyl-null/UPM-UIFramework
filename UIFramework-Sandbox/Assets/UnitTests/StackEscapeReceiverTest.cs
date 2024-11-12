@@ -6,6 +6,7 @@ using UIFramework.Runtime.EventBus;
 using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.PageController;
+using UIFramework.Runtime.Utility;
 
 namespace UnitTests
 {
@@ -17,7 +18,7 @@ namespace UnitTests
             // arrange
             IPageController controller = Substitute.For<IPageController>();
             IEventBus eventBus = Substitute.For<IEventBus>();
-            StackEscapeReceiver strategy = new StackEscapeReceiver(controller, eventBus);
+            StackEscapeReceiver strategy = new StackEscapeReceiver(Substitute.For<IUILogger>(), controller, eventBus);
 
             List<IPage> pageList = new List<IPage>();
             for (int i = 0; i < 3; ++i)
@@ -53,7 +54,7 @@ namespace UnitTests
             // arrange
             IPageController controller = Substitute.For<IPageController>();
             IEventBus eventBus = Substitute.For<IEventBus>();
-            StackEscapeReceiver strategy = new StackEscapeReceiver(controller, eventBus);
+            StackEscapeReceiver strategy = new StackEscapeReceiver(Substitute.For<IUILogger>(), controller, eventBus);
 
             List<IPage> pageList = new List<IPage>();
             for (int i = 0; i < 3; ++i)

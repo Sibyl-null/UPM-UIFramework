@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
+using UIFramework.Runtime.Utility;
 using UnityEngine;
 
 namespace UnitTests
@@ -27,7 +28,7 @@ namespace UnitTests
         {
             // arrange
             var arg = new LayerControllerArg(_root, 5, "Default", 50);
-            UILayerController controller = new UILayerController(arg);
+            UILayerController controller = new UILayerController(Substitute.For<IUILogger>(), arg);
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             for (int i = 0; i < count; ++i)
@@ -54,7 +55,7 @@ namespace UnitTests
         {
             // arrange
             var arg = new LayerControllerArg(_root, 5, "Default", 50);
-            UILayerController controller = new UILayerController(arg);
+            UILayerController controller = new UILayerController(Substitute.For<IUILogger>(), arg);
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             var target = Substitute.For<IPage>();
@@ -82,7 +83,7 @@ namespace UnitTests
         {
             // arrange
             var arg = new LayerControllerArg(_root, 5, "Default", 50);
-            UILayerController controller = new UILayerController(arg);
+            UILayerController controller = new UILayerController(Substitute.For<IUILogger>(), arg);
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             pagesInLayer.Add(Substitute.For<IPage>());
@@ -108,7 +109,7 @@ namespace UnitTests
         {
             // arrange
             var arg = new LayerControllerArg(_root, 5, "Default", 50);
-            UILayerController controller = new UILayerController(arg);
+            UILayerController controller = new UILayerController(Substitute.For<IUILogger>(), arg);
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             var target = Substitute.For<IPage>();
