@@ -19,8 +19,6 @@ namespace UI.Core
             Instance = new UIManager();
             Instance.InitInternal(canvas, new UIResLoader());
             Instance.LoadInfos();
-
-            UIUtility.SetUILayerLogger(order => Instance.Settings.GetLayerName(order));
         }
         
         public static void Destroy()

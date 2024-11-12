@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using UIFramework.Runtime;
 using UIFramework.Runtime.InfoContainer;
 using UIFramework.Runtime.Page;
-using UIFramework.Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,14 +13,11 @@ namespace UIFramework.Editor.CodeGenerator
         internal class InfoItem
         {
             public string PageType;
-            public string LayerOrder;
             public string LoadPath;
 
-            public InfoItem(string pageType, string layerName, string loadPath)
+            public InfoItem(string pageType, string loadPath)
             {
-                UIRuntimeSettings settings = UIEditorUtility.LoadScriptableAsset<UIRuntimeSettings>();
                 PageType = pageType;
-                LayerOrder = settings.GetLayerOrder(layerName).ToString();
                 LoadPath = loadPath;
             }
         }
@@ -79,14 +72,8 @@ namespace UIFramework.Editor.CodeGenerator
                 if (page == null)
                     continue;
 
-                UICodeGenAttribute attribute = page.GetType().GetCustomAttribute<UICodeGenAttribute>();
-                if (attribute == null)
-                    throw new Exception($"{page.GetType().Name} 脚本缺少 UICodeGenAttribute 特性");
-
                 data.Namespaces.Add(page.GetType().Namespace);
-                data.InfoItems.Add(new InfoItem(page.GetType().Name,
-                    attribute.LayerName,
-                    assetPath));
+                data.InfoItems.Add(new InfoItem(page.GetType().Name, assetPath));
             }
             
             return data;
@@ -96,17 +83,6 @@ namespace UIFramework.Editor.CodeGenerator
         {
             data.Namespaces = data.Namespaces.ToHashSet().ToList();
             data.Namespaces.Sort();
-            
-            data.InfoItems.Sort((a, b) =>
-            {
-                int aLayerOrder = int.Parse(a.LayerOrder);
-                int bLayerOrder = int.Parse(b.LayerOrder);
-                
-                if (aLayerOrder == bLayerOrder)
-                    return string.Compare(a.PageType, b.PageType, StringComparison.Ordinal);
-                
-                return aLayerOrder.CompareTo(bLayerOrder);
-            });
         }
     }
 }

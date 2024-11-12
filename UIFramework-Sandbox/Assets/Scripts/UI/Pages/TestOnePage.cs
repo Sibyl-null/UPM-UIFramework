@@ -1,10 +1,8 @@
 using UI.Core;
 using UIFramework.Runtime.Page;
-using UIFramework.Runtime.Utility;
 
 namespace UI.Pages
 {
-    [UICodeGen("Dialog")]
     public class TestOnePage : GamePage
     {
         protected override UILayer UILayer => UILayer.Bottom;

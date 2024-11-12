@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UIFramework.Editor.CodeGenerator;
-using UIFramework.Runtime;
 using UIFramework.Runtime.Page;
 using UnityEditor;
 using UnityEngine;
@@ -17,22 +14,6 @@ namespace UIFramework.Editor
         {
             GetWindow<UIInitWindow>();
         }
-        
-        [ValueDropdown(nameof(GetLayerNames))]
-        public string LayerName;
-
-        private IEnumerable<string> GetLayerNames()
-        {
-            UIRuntimeSettings settings = UIEditorUtility.LoadScriptableAsset<UIRuntimeSettings>();
-            return settings.LayerInfos.Select(x => x.Name);
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            UIEditorSettings settings = UIEditorSettings.MustLoad();
-            LayerName = settings.DefaultLayerName;
-        }
 
         [Button("确认", ButtonSizes.Medium)]
         private void Sure()
@@ -43,9 +24,9 @@ namespace UIFramework.Editor
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             GameObject go = Selection.activeGameObject;
             
-            PageGenerator.Generate(go, LayerName);
+            PageGenerator.Generate(go);
             UIInfoGenerator.GenerateByInitWindow(
-                new UIInfoGenerator.InfoItem(go.name, LayerName, AssetDatabase.GetAssetPath(go)),
+                new UIInfoGenerator.InfoItem(go.name, AssetDatabase.GetAssetPath(go)),
                 $"{settings.PageNamespace}");
             
             Close();
@@ -62,13 +43,6 @@ namespace UIFramework.Editor
                 return false;
             }
             
-            UIRuntimeSettings settings = UIEditorUtility.LoadScriptableAsset<UIRuntimeSettings>();
-            if (settings.LayerInfos.Count(x => x.Name == LayerName) == 0)
-            {
-                Debug.LogError("[UI] 该 LayerName 未在 RuntimeSettings 中定义");
-                return false;
-            }
-
             BasePage page = go.GetComponent<BasePage>();
             if (page != null)
             {

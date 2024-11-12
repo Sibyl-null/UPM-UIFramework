@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Sirenix.OdinInspector;
-using UIFramework.Runtime;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,10 +13,6 @@ namespace UIFramework.Editor
         
         [Tooltip("UI Prefab 需要处于这些目录下")]
         public List<DefaultAsset> UIPrefabLoadFolders;
-
-        [Tooltip("使用 UI 初始化窗口时默认选择的 LayerName")]
-        [ValueDropdown(nameof(GetLayerNames))]
-        public string DefaultLayerName;
         
         [Header("UIInfo 生成配置")]
         public string UIInfoFilePath;
@@ -29,12 +22,6 @@ namespace UIFramework.Editor
         public string PageGenFolder;
         public string PageNamespace;
         public TextAsset PageTemplate;
-        
-        private IEnumerable<string> GetLayerNames()
-        {
-            UIRuntimeSettings settings = UIEditorUtility.LoadScriptableAsset<UIRuntimeSettings>();
-            return settings.LayerInfos.Select(x => x.Name);
-        }
         
         
         // ------------------------------------------------------------------------
@@ -79,7 +66,6 @@ namespace UIFramework.Editor
         private static void SetDefaultData(UIEditorSettings settings)
         {
             settings.UIInfoFilePath = "Assets/Scripts/UI/Core/UIManager_Info.cs";
-            settings.DefaultLayerName = "Dialog";
             settings.PageGenFolder = "Assets/Scripts/UI/Pages";
             settings.PageNamespace = "UI.Pages";
             settings.TemplateUIPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TemplateUIPrefabPath);

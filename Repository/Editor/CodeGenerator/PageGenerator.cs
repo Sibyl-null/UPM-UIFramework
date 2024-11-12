@@ -14,11 +14,10 @@ namespace UIFramework.Editor.CodeGenerator
         {
             public string SelfNamespace;
             public string PageClassName;
-            public string LayerName;
             public HashSet<string> DepNamespaceSet;
         }
 
-        internal static void Generate(GameObject go, string layerName)
+        internal static void Generate(GameObject go)
         {
             UIEditorSettings settings = UIEditorSettings.MustLoad();
             
@@ -26,11 +25,9 @@ namespace UIFramework.Editor.CodeGenerator
             {
                 SelfNamespace = $"{settings.PageNamespace}",
                 PageClassName = go.name,
-                LayerName = layerName,
                 DepNamespaceSet = new HashSet<string>()
                 {
                     typeof(IPageArg).Namespace,
-                    typeof(UICodeGenAttribute).Namespace
                 }
             };
 
