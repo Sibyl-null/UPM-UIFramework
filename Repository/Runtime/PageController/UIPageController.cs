@@ -97,7 +97,7 @@ namespace UIFramework.Runtime.PageController
                 return null;
             }
 
-            _layerController.AddPageInOrder(info.Layer, page);
+            _layerController.AddPageInOrder(page);
             _eventBus.Dispatch(EventType.OpenBeforeAnim, info);
             
             UIAsyncHandle handle = page.Open(arg);
@@ -132,7 +132,7 @@ namespace UIFramework.Runtime.PageController
             UIAsyncHandle handle = page.Close(closeAnim);
             handle.AddCompletedCallback(() =>
             {
-                _layerController.RemovePageInOrder(info.Layer, page);
+                _layerController.RemovePageInOrder(page);
                 _eventBus.Dispatch(EventType.CloseAfterAnim, info);
             });
 

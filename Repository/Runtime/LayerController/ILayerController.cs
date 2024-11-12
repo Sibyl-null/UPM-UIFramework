@@ -8,8 +8,8 @@ namespace UIFramework.Runtime.LayerController
     {
         void Release();
 
-        void AddPageInOrder(int layer, IPage target);
-        void RemovePageInOrder(int layer, IPage target);
+        void AddPageInOrder(IPage target);
+        void RemovePageInOrder(IPage target);
 
         Transform GetOrAddLayer(int layer);
         List<IPage> GetPagesInLayer(int layer);

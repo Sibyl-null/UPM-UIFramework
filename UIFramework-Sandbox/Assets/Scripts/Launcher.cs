@@ -55,12 +55,6 @@ public class Launcher : MonoBehaviour
     }
     
     [Button, BoxGroup("TestOne")]
-    private void OpenQueueTestOnePage()
-    {
-        UIManager.Instance.OpenQueuePage<TestOnePage>();
-    }
-    
-    [Button, BoxGroup("TestOne")]
     private void CloseTestOnePageNoAnim()
     {
         UIManager.Instance.ClosePage<TestOnePage>(closeAnim: false);
@@ -96,12 +90,6 @@ public class Launcher : MonoBehaviour
     private void DestroyTestTwoPage()
     {
         UIManager.Instance.DestroyPage<TestTwoPage>();
-    }
-    
-    [Button, BoxGroup("TestTwo")]
-    private void OpenQueueTestTwoPage()
-    {
-        UIManager.Instance.OpenQueuePage<TestTwoPage>();
     }
     
     [Button, BoxGroup("TestTwo")]

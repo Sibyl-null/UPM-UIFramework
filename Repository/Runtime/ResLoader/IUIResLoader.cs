@@ -4,7 +4,7 @@ namespace UIFramework.Runtime.ResLoader
 {
     public interface IUIResLoader
     {
-        GameObject LoadAndInstantiatePrefab(string path, Transform parent);
+        GameObject Load(string path);
         void UnLoad(string path);
         UIRuntimeSettings LoadSettings();
     }

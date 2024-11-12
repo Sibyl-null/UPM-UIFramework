@@ -26,12 +26,17 @@ namespace UIFramework.Runtime.PageFactory
                 return (null, null);
             }
             
-            Transform parent = _layerController.GetOrAddLayer(info.Layer);
-            
-            GameObject go = _resLoader.LoadAndInstantiatePrefab(info.LoadPath, parent);
+            GameObject prefab = _resLoader.Load(info.LoadPath);
+            if (prefab == null)
+            {
+                UILogger.Error($"[UI] UIPrefab 加载失败失败: {info.LoadPath}");
+                return (null, null);
+            }
+
+            GameObject go = Object.Instantiate(prefab);
             if (go == null)
             {
-                UILogger.Error($"[UI] UIPrefab 实例化失败: {info.PageType.Name}");
+                UILogger.Error($"[UI] UIPrefab 实例化失败: {info.LoadPath}");
                 return (null, null);
             }
             
@@ -42,9 +47,12 @@ namespace UIFramework.Runtime.PageFactory
             IPage page = go.GetComponent<IPage>();
             if (page == null)
             {
-                UILogger.Error($"[UI] {go.name} 未添加实现 IPage 组件");
+                UILogger.Error($"[UI] {go.name} 未添加实现 IPage 的组件");
                 return (null, null);
             }
+            
+            Transform parent = _layerController.GetOrAddLayer(page.Layer);
+            go.transform.SetParent(parent, false);
 
             return (page, go);
         }

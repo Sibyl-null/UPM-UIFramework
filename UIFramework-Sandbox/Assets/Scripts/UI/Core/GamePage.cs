@@ -2,8 +2,12 @@ using UIFramework.Runtime.Page;
 
 namespace UI.Core
 {
-    public class GamePage : BasePage
+    public abstract class GamePage : BasePage
     {
+        public override int Layer => (int)UILayer;
+
+        protected abstract UILayer UILayer { get; }
+
         public override void OnEscape()
         {
             base.OnEscape();

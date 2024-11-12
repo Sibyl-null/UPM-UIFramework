@@ -12,8 +12,6 @@ namespace UnitTests
         private Transform _root;
 
         private const int BottomLayer = 0;
-        private const int MiddleLayer = 1000;
-        private const int TopLayer = 2000;
         
         [SetUp]
         public void Setup()
@@ -36,7 +34,9 @@ namespace UnitTests
                 pagesInLayer.Add(Substitute.For<IPage>());
 
             // act
-            controller.AddPageInOrder(BottomLayer, Substitute.For<IPage>());
+            IPage target = Substitute.For<IPage>();
+            target.Layer.Returns(BottomLayer);
+            controller.AddPageInOrder(target);
             
             // assert
             Assert.AreEqual(count + 1, pagesInLayer.Count);
@@ -58,6 +58,7 @@ namespace UnitTests
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             var target = Substitute.For<IPage>();
+            target.Layer.Returns(BottomLayer);
 
             pagesInLayer.Add(Substitute.For<IPage>());
             pagesInLayer.Add(Substitute.For<IPage>());
@@ -65,7 +66,7 @@ namespace UnitTests
             pagesInLayer.Add(Substitute.For<IPage>());
             
             // act
-            controller.AddPageInOrder(BottomLayer, target);
+            controller.AddPageInOrder(target);
             
             // assert
             Assert.AreEqual(4, pagesInLayer.Count);
@@ -89,7 +90,9 @@ namespace UnitTests
             pagesInLayer.Add(Substitute.For<IPage>());
             
             // act
-            controller.RemovePageInOrder(BottomLayer, Substitute.For<IPage>());
+            IPage target = Substitute.For<IPage>();
+            target.Layer.Returns(BottomLayer);
+            controller.RemovePageInOrder(target);
             
             // assert
             Assert.AreEqual(3, pagesInLayer.Count);
@@ -109,6 +112,7 @@ namespace UnitTests
 
             List<IPage> pagesInLayer = controller.GetPagesInLayer(BottomLayer);
             var target = Substitute.For<IPage>();
+            target.Layer.Returns(BottomLayer);
             
             pagesInLayer.Add(Substitute.For<IPage>());
             pagesInLayer.Add(Substitute.For<IPage>());
@@ -116,7 +120,7 @@ namespace UnitTests
             pagesInLayer.Add(Substitute.For<IPage>());
             
             // act
-            controller.RemovePageInOrder(BottomLayer, target);
+            controller.RemovePageInOrder(target);
             
             // assert
             Assert.AreEqual(3, pagesInLayer.Count);

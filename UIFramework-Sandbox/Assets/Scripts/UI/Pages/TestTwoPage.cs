@@ -7,6 +7,8 @@ namespace UI.Pages
     [UICodeGen("Dialog")]
     public class TestTwoPage : GamePage
     {
+        protected override UILayer UILayer => UILayer.Bottom;
+        
         protected override void OnInit()
         {
             base.OnInit();

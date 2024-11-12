@@ -8,7 +8,7 @@ namespace UI.Core
     /** 替换为项目中自己的加载方式 */
     public class UIResLoader : IUIResLoader
     {
-        public GameObject LoadAndInstantiatePrefab(string path, Transform parent)
+        public GameObject Load(string path)
         {
             path = path.Replace("Assets/Resources/", "").Replace(".prefab", "");
             
@@ -19,7 +19,7 @@ namespace UI.Core
                 return null;
             }
             
-            return Object.Instantiate(prefab, parent);
+            return prefab;
         }
 
         public void UnLoad(string path)

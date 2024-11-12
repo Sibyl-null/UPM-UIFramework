@@ -6,7 +6,6 @@ using UIFramework.Runtime.LayerController;
 using UIFramework.Runtime.Page;
 using UIFramework.Runtime.PageController;
 using UIFramework.Runtime.PageFactory;
-using UIFramework.Runtime.QueueDriver;
 using UIFramework.Runtime.ResLoader;
 using UIFramework.Runtime.Utility;
 using UnityEngine;
@@ -32,7 +31,6 @@ namespace UIFramework.Runtime
         protected IPageFactory PageFactory { get; set; }
         protected IPageController PageController { get; set; }
         protected IEscapeReceiver EscapeReceiver { get; set; }
-        protected IQueueDriver QueueDriver { get; set; }
 
         protected virtual void InitInternal(Canvas canvas, IUIResLoader resLoader)
         {
@@ -49,12 +47,10 @@ namespace UIFramework.Runtime
             PageFactory = new MonoPageFactory(ResLoader, LayerController);
             PageController = new UIPageController(PageFactory, LayerController, EventBus, Settings.SortingLayerName);
             EscapeReceiver = new StackEscapeReceiver(PageController, EventBus);
-            QueueDriver = new UIQueueDriver(PageController, EventBus);
         }
 
         protected virtual void ReleaseInternal()
         {
-            QueueDriver.Release();
             EscapeReceiver.Release();
             PageController.Release();
             LayerController.Release();
@@ -134,19 +130,6 @@ namespace UIFramework.Runtime
         public void DestroyPage<T>(bool closeAnim = true) where T : class, IPage
         {
             DestroyPage(typeof(T), closeAnim);
-        }
-
-        public void OpenQueuePage(Type pageType, IPageArg arg = null, int policy = 0)
-        {
-            if (!InfoContainer.TryGetInfo(pageType, out UIInfo info))
-                return;
-            
-            QueueDriver.EnqueueQueueInfo(info, arg, policy);
-        }
-        
-        public void OpenQueuePage<T>(IPageArg arg = null, int policy = 0) where T : class, IPage
-        {
-            OpenQueuePage(typeof(T), arg, policy);
         }
         
         public virtual void Tick()

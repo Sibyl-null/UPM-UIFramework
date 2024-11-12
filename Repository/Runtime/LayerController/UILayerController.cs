@@ -44,8 +44,9 @@ namespace UIFramework.Runtime.LayerController
             _items.Clear();
         }
 
-        public void AddPageInOrder(int layer, IPage target)
+        public void AddPageInOrder(IPage target)
         {
+            int layer = target.Layer;
             LayerItem item = GetOrAddLayerItem(layer);
 
             if (item.Pages.Contains(target))
@@ -64,8 +65,9 @@ namespace UIFramework.Runtime.LayerController
             }
         }
 
-        public void RemovePageInOrder(int layer, IPage target)
+        public void RemovePageInOrder(IPage target)
         {
+            int layer = target.Layer;
             LayerItem item = GetOrAddLayerItem(layer);
 
             if (!item.Pages.Contains(target))

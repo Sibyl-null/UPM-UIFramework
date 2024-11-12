@@ -116,7 +116,7 @@ namespace UnitTests
             items.Add(new UIEventBus.EventItem(action2, 1));
             items.Add(new UIEventBus.EventItem(action3, 2));
 
-            UIInfo uiInfo = new UIInfo(default, default, default);
+            UIInfo uiInfo = new UIInfo(default, default);
 
             // act
             eventBus.Dispatch(EventType.CreateBefore, uiInfo);

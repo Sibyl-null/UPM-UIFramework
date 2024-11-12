@@ -20,6 +20,8 @@ namespace UIFramework.Runtime.Page
         protected GraphicRaycaster GraphicRaycaster { get; private set; }
         protected UIRaycast UIRaycast { get; private set; }
         
+        public abstract int Layer { get; }
+        
         
         // ------------------------------------------------------------------------
         // 生命周期

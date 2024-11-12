@@ -13,6 +13,7 @@ namespace UIFramework.Runtime.Page
         bool IsOpening { get; }
         bool IsPlayingAnim { get; }
         bool InputActive { get; }
+        int Layer { get; }
 
         void Create(UIInfo info, string sortingLayerName, GameObject go);
         UIAsyncHandle Open(IPageArg arg = null);

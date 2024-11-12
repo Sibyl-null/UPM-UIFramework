@@ -53,7 +53,7 @@ namespace UnitTests
         public void _01_OpenPage_With_Page_FirstOpen()
         {
             // arrange
-            UIInfo info = new UIInfo(OneMockPageType, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default);
             
             // act
             UIAsyncHandle handle = _pageController.OpenPage(info);
@@ -64,7 +64,7 @@ namespace UnitTests
             Assert.AreNotEqual(null, page);
             Assert.AreNotEqual(null, handle);
             
-            _layerController.Received(1).AddPageInOrder(info.Layer, page);
+            _layerController.Received(1).AddPageInOrder(page);
             
             Received.InOrder(() =>
             {
@@ -86,7 +86,7 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -97,7 +97,7 @@ namespace UnitTests
             Assert.AreNotEqual(null, handle);
             
             page.DidNotReceiveWithAnyArgs().Create(default, default, default);
-            _layerController.Received(1).AddPageInOrder(info.Layer, page);
+            _layerController.Received(1).AddPageInOrder(page);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CreateBefore, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CreateAfter, info);
@@ -118,7 +118,7 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -129,7 +129,7 @@ namespace UnitTests
             
             page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             page.DidNotReceiveWithAnyArgs().Open();
-            _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CreateBefore, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CreateAfter, info);
@@ -145,7 +145,7 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -156,7 +156,7 @@ namespace UnitTests
             
             page.DidNotReceiveWithAnyArgs().Create(default, default, default);
             page.DidNotReceiveWithAnyArgs().Open();
-            _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().AddPageInOrder(default);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CreateBefore, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CreateAfter, info);
@@ -170,14 +170,14 @@ namespace UnitTests
         public void _05_ClosePage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(OneMockPageType, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default);
             
             // act
             UIAsyncHandle handle = _pageController.ClosePage(info, default);
             
             // assert
             Assert.AreEqual(null, handle);
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
         }
@@ -190,7 +190,7 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -199,7 +199,7 @@ namespace UnitTests
             
             // assert
             page.DidNotReceiveWithAnyArgs().Destroy();
-            _layerController.Received(1).RemovePageInOrder(info.Layer, page);
+            _layerController.Received(1).RemovePageInOrder(page);
             
             Received.InOrder(() =>
             {
@@ -217,7 +217,7 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -228,7 +228,7 @@ namespace UnitTests
             
             page.DidNotReceiveWithAnyArgs().Close(default);
             page.DidNotReceiveWithAnyArgs().Destroy();
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
         }
@@ -241,7 +241,7 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -252,7 +252,7 @@ namespace UnitTests
             
             page.DidNotReceiveWithAnyArgs().Close(default);
             page.DidNotReceiveWithAnyArgs().Destroy();
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
         }
@@ -263,14 +263,14 @@ namespace UnitTests
         public void _09_DestroyPage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(OneMockPageType, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default);
             
             // act
             UIAsyncHandle handle = _pageController.DestroyPage(info, default);
             
             // assert
             Assert.AreEqual(null, handle);
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
@@ -285,7 +285,7 @@ namespace UnitTests
             IPage page = SubstitutePage();
             page.IsPlayingAnim.Returns(true);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -296,7 +296,7 @@ namespace UnitTests
             
             page.DidNotReceiveWithAnyArgs().Close(default);
             page.DidNotReceiveWithAnyArgs().Destroy();
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
@@ -312,7 +312,7 @@ namespace UnitTests
             page.IsOpening.Returns(true);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -322,7 +322,7 @@ namespace UnitTests
             // assert
             Assert.AreNotEqual(null, handle);
             
-            _layerController.Received(1).RemovePageInOrder(info.Layer, page);
+            _layerController.Received(1).RemovePageInOrder(page);
             
             Received.InOrder(() =>
             {
@@ -344,7 +344,7 @@ namespace UnitTests
             page.IsOpening.Returns(false);
             page.IsPlayingAnim.Returns(false);
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
 
             // act
@@ -354,7 +354,7 @@ namespace UnitTests
             Assert.AreNotEqual(null, handle);
             
             page.DidNotReceiveWithAnyArgs().Close(default);
-            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default, default);
+            _layerController.DidNotReceiveWithAnyArgs().RemovePageInOrder(default);
             
             _eventBus.DidNotReceive().Dispatch(EventType.CloseBeforeAnim, info);
             _eventBus.DidNotReceive().Dispatch(EventType.CloseAfterAnim, info);
@@ -373,7 +373,7 @@ namespace UnitTests
         public void _13_CreatePage_With_Page_NotExist()
         {
             // arrange
-            UIInfo info = new UIInfo(OneMockPageType, default, default);
+            UIInfo info = new UIInfo(OneMockPageType, default);
             
             // act
             IPage page = _pageController.CreatePage(info);
@@ -395,7 +395,7 @@ namespace UnitTests
             // arrange
             IPage page = SubstitutePage();
             
-            UIInfo info = new UIInfo(page.GetType(), default, default);
+            UIInfo info = new UIInfo(page.GetType(), default);
             _pageController.AddPageInDebug(page);
             
             // act

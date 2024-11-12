@@ -10,15 +10,15 @@ namespace UI.Core
 {
     public partial class UIManager
     {
-        private void AddInfo(Type pageType, int layer, string loadPath)
+        private void AddInfo(Type pageType, string loadPath)
         {
-            InfoContainer.AddInfo(new UIInfo(pageType, layer, loadPath));
+            InfoContainer.AddInfo(new UIInfo(pageType, loadPath));
         }
         
         private void LoadInfos()
         {
-            AddInfo(typeof(TestOnePage), 2000, "Assets/Resources/TestOnePage.prefab");
-            AddInfo(typeof(TestTwoPage), 2000, "Assets/Resources/TestTwoPage.prefab");
+            AddInfo(typeof(TestOnePage), "Assets/Resources/TestOnePage.prefab");
+            AddInfo(typeof(TestTwoPage), "Assets/Resources/TestTwoPage.prefab");
         }
     }
 }

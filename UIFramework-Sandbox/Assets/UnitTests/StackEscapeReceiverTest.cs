@@ -26,7 +26,7 @@ namespace UnitTests
             for (int i = 0; i < 3; ++i)
             {
                 IPage page = Substitute.For<IPage>();
-                UIInfo info = new UIInfo(page.GetType(), default,default);
+                UIInfo info = new UIInfo(page.GetType(), default);
 
                 page.InputActive.Returns(true);
                 page.CanConsumeEscape().Returns(i <= index);
@@ -65,7 +65,7 @@ namespace UnitTests
             for (int i = 0; i < 3; ++i)
             {
                 IPage page = Substitute.For<IPage>();
-                UIInfo info = new UIInfo(page.GetType(), default,default);
+                UIInfo info = new UIInfo(page.GetType(), default);
 
                 page.InputActive.Returns(i != index);
                 page.CanConsumeEscape().Returns(false);
